@@ -1,11 +1,14 @@
 * {margin: 0; padding: 0;}
 body {background-color: #f3e5f5;}
 #wrap {width: 1200px; height: 900px; margin: 0 auto;}
-header {width: 100%; height: 150px; background: #9575cd;}
-nav {float: left; width: 15%; height: 700px; background: #7e57c2;}
+header {width: 100%; height: 146px; background: #9575cd;}
 aside {float: right; width: 15%; height: 700px; background: #7e57c2;}
-section {float: left; width: 70%; height: 700px; background: #673ab7;}
+section {float: left; width: 70%; height: 700px; background: #eeeeee; text-align: center;}
 footer {clear: both; width: 100%; height: 150px; background: #5e35b1;}
+
+.article{width:95%; height:90%; background:#ffffff; display:inline-block; margin-top:25px; margin-bottom:25px; padding:0px;}
+.nav-side {float: left; width: 15%; height: 700px; background: #ffffff; }
+.nav-side ul li{border-bottom: 1px solid #eee; height:47px;}
 
 /* 화면 너비 0 ~ 1200px */
 @media (max-width: 1200px){
@@ -20,29 +23,31 @@ footer {clear: both; width: 100%; height: 150px; background: #5e35b1;}
 /* 화면 너비 0 ~ 480px */
 @media (max-width: 480px){
     #wrap {width: 100%;}
-    header {height: 300px;}
+    /* header {height: 300px;} */
     aside {float: none; width: 100%; height: 300px;}
     section {float: none; width: 100%; height: 300px;}
 }
 
-/* 
-div nav ul{border:1px solid grey;}
-div nav ul li{border:1px solid grey;} */
+a.nav-link{margin-left:5px; margin-right:5px;}
+li.nav-item .active{border-bottom: 5px solid greenyellow;}
+
+.div-horizon{float:left;}
 
 .nav-horizon ul{list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: #fff;}
-.nav-horizon li{float: left;}
+.nav-horizon li{float: left;;}
 .nav-horizon li a{display: block; color: gray; text-align: center; padding: 14px 16px; text-decoration: none;}
 .nav-horizon li a:hover{color: #333;}
 .nav-horizon li .active{border-bottom: 3px solid greenyellow;}
 
 
+
+
 .header-section1{position: sticky; top: 0;}
 
-/*
+/* 
 .dropdown{float: left; overflow: hidden;}
 .dropdown .dropbtn{cursor: pointer; font-size: 16px; border: none; outline: none; color: white; padding: 14px 16px; background-color: inherit; font-family: inherit; margin: 0;}
 .dropdown:hover, .dropbtn:focus{background-color: #333;}
 .dropdown-content a{float: none; color: black; padding: 12px 16px; text-decoration: none; display: block; text-align: left;}
 .dropdown-content a:hover{background-color: #333;}
-.show{display: block;}
-*/
+.show{display: block;} */
