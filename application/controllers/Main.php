@@ -10,8 +10,7 @@ class Main extends CI_Controller {
 	function __construct() {       
       parent::__construct();
       $this->load->database();
-      // $this->load->helper(array('url', 'date'));
-      $this->load->helper('url');
+      $this->load->helper(array('url', 'date'));
       session_start();
     }
 
@@ -22,6 +21,12 @@ class Main extends CI_Controller {
       // $this->Main_model->test();는 로드된 Main_model.php에서 test 함수를 실행하겠다는 뜻입니다.
 	  $this->load->model('Main_model');
 	  $this->Main_model->test();
+  }
+
+  function layout(){
+    $this->load->helper('url');
+    $this->load->view('layout_header_v');
+    $this->load->view('layout_v');
   }
   
   // login
@@ -54,10 +59,13 @@ class Main extends CI_Controller {
 
   function board(){
     //session_start();
+    $this->load->helper('url');
 		$this->load->model('board_m');
 		$posts_all = $this->board_m->posts_require_all();
-		$this->load->view('header_v');
-		$this->load->view('board_v', array('posts_all'=>$posts_all));
+    // $this->load->view('header_v');
+    $this->load->view('layout_header_v');
+    $this->load->view('layout_nav_v');
+    $this->load->view('board_v', array('posts_all'=>$posts_all));
   }
 
   function write(){
@@ -85,6 +93,5 @@ class Main extends CI_Controller {
             'comment'=>$comment
           )
         );
-	}
-
+  }
 }

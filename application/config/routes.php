@@ -64,6 +64,10 @@ $route['write']                     = 'main/write';
 $route['edit/(:num)']               = 'main/edit/$1';
 $route['post/(:num)']               = "main/post/$1";
 
+
+$route['android']                   = 'android/page';
+
+
 $route['/process/login']            = 'process/login';
 $route['/process/logout']           = 'process/logout';
 $route['/process/register']         = 'process/register';
