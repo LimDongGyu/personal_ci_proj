@@ -1,14 +1,17 @@
-* {margin: 0; padding: 0;}
+
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+@import url("http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700");
+
+* {margin: 0; padding: 0; font-family: 'Roboto', sans-serif;}
 body {background-color: #f3e5f5;}
 #wrap {width: 1200px; height: 900px; margin: 0 auto;}
-header {width: 100%; height: 146px; background: #9575cd;}
-aside {float: right; width: 15%; height: 700px; background: #7e57c2;}
-section {float: left; width: 70%; height: 700px; background: #eeeeee; text-align: center;}
-footer {clear: both; width: 100%; height: 150px; background: #5e35b1;}
-
-.article{width:95%; height:90%; background:#ffffff; display:inline-block; margin-top:25px; margin-bottom:25px; padding:0px;}
-.nav-side {float: left; width: 15%; height: 700px; background: #ffffff; }
-.nav-side ul li{border-bottom: 1px solid #eee; height:47px;}
+header {width: 100%; height: 165px; background: #ffffff;}
+aside {float: left; width: 15%; height: 1500px; background: #eeeeee;}
+section {float: left; width: 85%; height: 1500px; background: #eeeeee; text-align: center; margin:0px; padding:0px;}
+footer {clear: both; width: 100%; overflow: auto; background: #ffffff;}
+.article{width:80%; height:calc(1500px - 120px); background:#ffffff; display:inline-block; margin-top:20px; margin-bottom:100px; margin-left: 2%; margin-right: 2%;}
+.nav-side {float: left; width: 400px; height: 100vh; background: #ffffff; border-right: 2px solid #bbbbbb}
+.nav-side ul li{border-bottom: 1px solid #eee; height:55px; font-family: Roboto, sans-serif;}
 
 /* 화면 너비 0 ~ 1200px */
 @media (max-width: 1200px){
@@ -29,7 +32,7 @@ footer {clear: both; width: 100%; height: 150px; background: #5e35b1;}
 }
 
 a.nav-link{margin-left:5px; margin-right:5px;}
-li.nav-item .active{border-bottom: 5px solid greenyellow;}
+li.nav-item .active{border-bottom: 2px solid greenyellow;}
 
 .div-horizon{float:left;}
 
@@ -37,17 +40,38 @@ li.nav-item .active{border-bottom: 5px solid greenyellow;}
 .nav-horizon li{float: left;;}
 .nav-horizon li a{display: block; color: gray; text-align: center; padding: 14px 16px; text-decoration: none;}
 .nav-horizon li a:hover{color: #333;}
-.nav-horizon li .active{border-bottom: 3px solid greenyellow;}
+.nav-horizon li .active{border-bottom: 2px solid greenyellow;}
 
 
 
 
-.header-section1{position: sticky; top: 0;}
+.header-section1{position: sticky; top: 0; background-color: #ffffff;}
 
-/* 
-.dropdown{float: left; overflow: hidden;}
-.dropdown .dropbtn{cursor: pointer; font-size: 16px; border: none; outline: none; color: white; padding: 14px 16px; background-color: inherit; font-family: inherit; margin: 0;}
-.dropdown:hover, .dropbtn:focus{background-color: #333;}
+
+.dropdown2{float: left; overflow: hidden;}
+.dropdown2 .dropbtn{cursor: pointer; font-size: 16px; border: none; outline: none; color: white; padding: 14px 16px; background-color: inherit; font-family: inherit; margin: 0;}
+.dropdown2:hover, .dropbtn:focus{background-color: #333;}
 .dropdown-content a{float: none; color: black; padding: 12px 16px; text-decoration: none; display: block; text-align: left;}
 .dropdown-content a:hover{background-color: #333;}
-.show{display: block;} */
+.show{display: block;}
+
+.vertical-center{padding:0px; margin-left:0px; margin-right:0px; height:55px; line-height:55px; display:block; text-align: center;}
+.default-padding{margin-left:0px; margin-right:0px; padding-left:10px; padding-right:10px}
+
+.nav-side ul li a{text-decoration:none; padding:0px; margin-left:20px; margin-right:0px; height:55px; line-height:55px; display:block; color:#444444}
+.footer-guide .nav-guide a{text-decoration:none; padding:0px; margin-left:5px; margin-right:5px; height:50px; color:#000000; font-size:19px}
+.footer-guide .nav-guide{height:50px; line-height:50px; display: block; text-align: center;}
+.footer-guide .nav-guide .footer-guideline{float:left; margin-right:10px; margin-left:10px; height: 50px; line-height:50px; text-align: center;}
+/*scrollbar*/
+/* width */
+::-webkit-scrollbar {width: 10px;}
+/* Track */
+::-webkit-scrollbar-track {background: #f1f1f1;}
+/* Handle */
+::-webkit-scrollbar-thumb {background: #dddddd;}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {background: #555;}
+
+
+.footer-list .footer-ul li{list-style:none; height:35px;}
+.footer-list .footer-ul li a{color: #000000;}
