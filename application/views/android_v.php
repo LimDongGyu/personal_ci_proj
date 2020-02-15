@@ -151,9 +151,31 @@
             <section>
                 <div class="article">
                     <div class="article-inner" style="text-align:left;; margin: 30px; height:95%; width: calc(100%-60px);">
-                        <div class="article-meta">Android 개발자 > 문서 > 참조</div>
-                        <div class="reference"><h4>API reference</h4></div>
+                        <div class="article-meta" style="width:100%; height:40px;">
+                            <div style="float:left;">Android 개발자 > 문서 > 참조</div>
+                            <div style="float:right;">☆☆☆☆☆</div>
+                        </div>
+                        <div class="reference" style="height:60px;"><p style="color:#444444; font-size:30px;">API reference</p></div>
+                        <div><p>You can build your Android app with the<a href="#">Android Platform APIs</a> and the following libraries.</p></div>
+                        <div style="background-color: #f7f7f7; height:80px; width:100%;">
+                            <div style="float:left; width:40px;"><img src="https://lh3.googleusercontent.com/proxy/Z0-Wzkg3KoU3jv0S1-iYULplnRelGEfC9AIK5SMicB4cm8sU79qW2grdXfaJ2bzyC0ZFRmo6-U2ENinG5_wRNsiJ0vsfUt_AUJwMm2C523i7NlMlWHM-Kctb7Dc0tfeerK9wbiEhdgIPqq_9oIlWqHrdx_giKnNvZW8Kc3LI70FXK-t9o0Cqmmll7XP2pb9MzFEfTPBUNzKPA07JcDqS_g9mWf7vegh8ga8" style="height:40px;"></div>
+                            <div style="text-align:left;">
+                                <h4>Developing with Kotlin?</h4>
+                                <p>Check out the Kotlin reference for the <a href="#">Android Platform</a> and <a href="#">AndroidX library.</a></p>
+                            </div>
+                        </div> 
+                        <div style="background-color: #e1f5fe; height:80px; width:100%">
+                            <span style="color:#01579b; font-size:30px;">★</span>
+                            <span style="color:#01579b;">Note: Many Kotlin reference topics are derived from Java-based source code. This means that some Kotlin reference topics might contain Java code snippets.</span>
+                        </div>
+                        <div class="article-section">
+                            <div class="article-content" style="background-color:blue;"></div>
+                            <div class="article-content"></div>
+                            <div class="article-content"></div>
+                        </div>
                     </div>
+
+
                     <p style="text-align:left; font-size:17px; padding-top:30px;">Content and code samples on this page are subject to the licenses described in the <a href="#">Content License</a>. Java is a registered trademark of Oracle and/or its affiliates. Last updated 2019-12-27.</p>
                 </div>
             </section>
