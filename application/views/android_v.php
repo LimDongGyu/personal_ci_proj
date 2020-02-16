@@ -169,13 +169,90 @@
                             <span style="color:#01579b;">Note: Many Kotlin reference topics are derived from Java-based source code. This means that some Kotlin reference topics might contain Java code snippets.</span>
                         </div>
                         <div class="article-section">
-                            <div class="article-content" style="background-color:blue;"></div>
-                            <div class="article-content"></div>
-                            <div class="article-content"></div>
+                            <div class="article-content">
+                                <p class="article-header">Android Support Library</p>
+                                <p>Provides a variety of Android feature and utility APIs that are compatible with a wide range of platform versions.</p>
+                            </div>
+                            <div class="article-content">
+                                <p class="article-header">AndroidX</p>
+                                <p>Refactored versions of the Android APIs that are not bundled with the operating system.</p>
+                            </div>
+                            <div class="article-content">
+                                <p class="article-header">AndroidX Test</p>
+                                <p>Includes APIs for testing your Android app, including Espresso, JUnit Runner, JUnit4 rules, and UI Automator.</p>
+                            </div>
+                        </div>
+                        <div class="article-section">
+                            <div class="article-content">
+                                <p class="article-header">AndroidX Constraint Layout</p>
+                                <p>Includes ConstraintLayout and related APIs for building constraint-based layouts.</p>
+                            </div>
+                            <div class="article-content">
+                                <p class="article-header">Architecture Components</p>
+                                <p>Includes APIs for a variety of core app components, such as APIs that manage your UI component lifecycle, data persistence, view model, and more.</p>
+                            </div>
+                            <div class="article-content">
+                                <p class="article-header">Jetpack Compose</p>
+                                <p>Jetpack Compose is a modern toolkit for building native Android UI. Jetpack Compose simplifies and accelerates UI development on Android with less code, powerful tools, and intuitive Kotlin APIs.</p>
+                            </div>
+                        </div>
+                        <div class="article-section">
+                            <div class="article-content">
+                                <p class="article-header">Android Automotive Library</p>
+                                <p>Provides APIs for building Android Automotive apps.</p>
+                            </div>
+                            <div class="article-content">
+                                <p class="article-header">Databinding Library</p>
+                                <p>Includes APIs to help you write declarative layouts and minimize the glue code necessary to bind your application logic and layouts.</p>
+                            </div>
+                            <div class="article-content">
+                                <p class="article-header">Material Components</p>
+                                <p>Material Components for Android (MDC-Android) help developers execute Material Design to build beautiful and functional Android apps.</p>
+                            </div>
+                        </div>
+                        <div class="article-section">
+                            <div class="article-content">
+                                <p class="article-header">Constraint Layout Library</p>
+                                <p>Legacy Support Library ConstraintLayout and related APIs for building constraint-based layouts.</p>
+                            </div>
+                            <div class="article-content">
+                                <p class="article-header">Android Test Support Library</p>
+                                <p>Includes APIs for testing your Android app, including Espresso, JUnit Runner, JUnit4 rules, and UI Automator.</p>
+                            </div>
+                            <div class="article-content">
+                                <p class="article-header">Android Wearable Library</p>
+                                <p>Provides APIs to build apps for wearable devices running Wear OS by Google.</p>
+                            </div>
+                        </div>
+                        <div class="article-section">
+                            <div class="article-content">
+                                <p class="article-header">Android Things Library</p>
+                                <p>Provides APIs to build connected devices running the Android Things platform.</p>
+                            </div>
+                            <div class="article-content">
+                                <p class="article-header">Play In-app Billing Library</p>
+                                <p>Provides APIs to help you implement Google Play's in-app billing and subscription features.</p>
+                            </div>
+                            <div class="article-content">
+                                <p class="article-header">Play Core Library</p>
+                                <p>Provides APIs to help you request, monitor, and manage on demand downloads for Google Play Instant and Dynamic Delivery.</p>
+                            </div>
+                        </div>
+                        <div class="article-section">
+                            <div class="article-content">
+                                <p class="article-header">Play Install Referrer library</p>
+                                <p>Provides APIs to securely retrieve referral content from Google Play.</p>
+                            </div>
+                            <div class="article-content">
+                                <p class="article-header"></p>
+                                <p></p>
+                            </div>
+                            <div class="article-content">
+                                <p class="article-header"></p>
+                                <p></p>
+                            </div>
                         </div>
                     </div>
-
-
                     <p style="text-align:left; font-size:17px; padding-top:30px;">Content and code samples on this page are subject to the licenses described in the <a href="#">Content License</a>. Java is a registered trademark of Oracle and/or its affiliates. Last updated 2019-12-27.</p>
                 </div>
             </section>

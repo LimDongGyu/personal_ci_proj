@@ -76,5 +76,6 @@ li.nav-item .active{border-bottom: 2px solid greenyellow;}
 .footer-list .footer-ul li{list-style:none; height:35px;}
 .footer-list .footer-ul li a{color: #000000;}
 
-.article-section{height:300px;}
-.article-content{float: left; height:250px; width:33.3%;}
+.article-section{height:180px; margin-top:10px;}
+.article-content{float: left; height:100px; width:33.3%; padding-right: 15px;}
+.article-content .article-header{color:#039be5}
