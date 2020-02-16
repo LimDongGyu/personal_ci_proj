@@ -58,20 +58,12 @@
                         <li class="nav-item default-padding">
                             <a class="nav-link vertical-center" href="#">Kotlin</a>
                         </li>
-                        <li class="nav-item active default-padding" style="border-bottom:2px solid greenyellow;">
-                            <a class="nav-link vertical-center" style="font-weight:bold; font-family:Roboto, sans-serif;" href="#">문서</a>
+                        <li class="nav-item active default-padding" style="border-bottom:2px solid #3ddc84;">
+                            <a class="nav-link vertical-center" href="#">문서</a>
                         </li>
                         <li class="nav-item default-padding">
                             <a class="nav-link vertical-center" href="#">뉴스</a>
                         </li>
-                        <!-- <li class="nav-item dropdown default-padding">
-                            <a class="nav-link dropdown-toggle vertical-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">더보기</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="overflow-y:scroll;">
-                                <a class="dropdown-item" href="#">Jetpack</a>
-                                <a class="dropdown-item" href="#">Kotlin</a>
-                                <a class="dropdown-item" href="#">뉴스</a>
-                            </div>
-                        </li> -->
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="검색" aria-label="Search">
@@ -89,12 +81,12 @@
                     </div>
             </nav> 
         </div>
-        <div class="header-section2" style="height:55px; background-color: #ffffff;">
+        <div class="header-section2" style="height:55px; background-color: #f7f7f7;">
             <a style="margin-left:20px; float:left; font-size:17px;" class="vertical-center">문서</a>
         </div>
-        <div class="nav-horizon" style="height: 55px; background-color: #444; border-bottom:1px solid #cccccc;">
+        <div class="nav-horizon" style="height:54px; background-color: #f7f7f7">
             <ul>
-                <li><a href="#">개요</a></li>
+                <li><a href="#" style="margin-left:5px;">개요</a></li>
                 <li><a href="#">가이드</a></li>
                 <li><a class="active" href="#">참조</a></li>
                 <li><a href="#">샘플</a></li>
@@ -147,26 +139,26 @@
             </ul>
         </nav>
         </div>   
-        <div style="float:left; width:calc(100% - 400px); overflow: auto;" id="nav-height">
+        <div style="float:left; width:calc(100% - 300px); overflow: auto;" id="nav-height">
             <section>
                 <div class="article">
                     <div class="article-inner" style="text-align:left;; margin: 30px; height:95%; width: calc(100%-60px);">
                         <div class="article-meta" style="width:100%; height:40px;">
                             <div style="float:left;">Android 개발자 > 문서 > 참조</div>
-                            <div style="float:right;">☆☆☆☆☆</div>
+                            <div style="float:right; font-size:20px; font-weight:bold;">☆☆☆☆☆</div>
                         </div>
                         <div class="reference" style="height:60px;"><p style="color:#444444; font-size:30px;">API reference</p></div>
                         <div><p>You can build your Android app with the<a href="#">Android Platform APIs</a> and the following libraries.</p></div>
                         <div style="background-color: #f7f7f7; height:80px; width:100%;">
-                            <div style="float:left; width:40px;"><img src="https://lh3.googleusercontent.com/proxy/Z0-Wzkg3KoU3jv0S1-iYULplnRelGEfC9AIK5SMicB4cm8sU79qW2grdXfaJ2bzyC0ZFRmo6-U2ENinG5_wRNsiJ0vsfUt_AUJwMm2C523i7NlMlWHM-Kctb7Dc0tfeerK9wbiEhdgIPqq_9oIlWqHrdx_giKnNvZW8Kc3LI70FXK-t9o0Cqmmll7XP2pb9MzFEfTPBUNzKPA07JcDqS_g9mWf7vegh8ga8" style="height:40px;"></div>
-                            <div style="text-align:left;">
-                                <h4>Developing with Kotlin?</h4>
+                            <div style="float:left; width:40px; margin-top:25px; margin-bottom:25px; margin-left:25px;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin-logo.svg/1200px-Kotlin-logo.svg.png" style="height:30px;"></div>
+                            <div style="text-align:left; height:80px;">
+                                <p style="font-weight:bold; padding-top:10px; margin-bottom:5px;">Developing with Kotlin?</p>
                                 <p>Check out the Kotlin reference for the <a href="#">Android Platform</a> and <a href="#">AndroidX library.</a></p>
                             </div>
                         </div> 
-                        <div style="background-color: #e1f5fe; height:80px; width:100%">
-                            <span style="color:#01579b; font-size:30px;">★</span>
-                            <span style="color:#01579b;">Note: Many Kotlin reference topics are derived from Java-based source code. This means that some Kotlin reference topics might contain Java code snippets.</span>
+                        <div style="background-color: #e1f5fe; height:80px; width:100%; margin-top:20px; margin-bottom:40px;">
+                            <span style="color:#01579b; font-size:30px; padding-right:10px; padding-left:30px;">★</span>
+                            <span style="color:#01579b; padding-right:20px;"><b>Note:</b><span style="height:80px;">Many Kotlin reference topics are derived from Java-based source code. This means that some Kotlin reference topics might contain Java code snippets.</span></span>
                         </div>
                         <div class="article-section">
                             <div class="article-content">
@@ -238,7 +230,7 @@
                                 <p>Provides APIs to help you request, monitor, and manage on demand downloads for Google Play Instant and Dynamic Delivery.</p>
                             </div>
                         </div>
-                        <div class="article-section">
+                        <!-- <div class="article-section">
                             <div class="article-content">
                                 <p class="article-header">Play Install Referrer library</p>
                                 <p>Provides APIs to securely retrieve referral content from Google Play.</p>
@@ -251,9 +243,13 @@
                                 <p class="article-header"></p>
                                 <p></p>
                             </div>
+                        </div> -->
+                        <div style="height:100px; padding-top:30px; border-top:1px solid #eeeeee;">
+                            <p style="font-size:20px; text-align:center;">이 페이지가 도움이 되셨나요?</p>
+                            <p style="font-size:20px; text-align:center; font-weight:bold;">☆☆☆☆☆<p>
                         </div>
                     </div>
-                    <p style="text-align:left; font-size:17px; padding-top:30px;">Content and code samples on this page are subject to the licenses described in the <a href="#">Content License</a>. Java is a registered trademark of Oracle and/or its affiliates. Last updated 2019-12-27.</p>
+                    <p style="text-align:left; font-size:15px; padding-top:30px;">Content and code samples on this page are subject to the licenses described in the <a href="#">Content License</a>. Java is a registered trademark of Oracle and/or its affiliates. Last updated 2019-12-27.</p>
                 </div>
             </section>
             <aside></aside>
