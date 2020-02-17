@@ -10,37 +10,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/board.css" type="text/css">
 </head>
 <body>
 
-<div class="container">
-    <div class="row justify-content-center" style="padding-top:50px">
+<div class="container" style="background-color:#444444; height:100vh;">
+    <div class="transparent_box">
+        <h2>Login</h2>
         <form action="/process/login" method="POST">
-        <!--    <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">ID</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" placeholer="Please your id">
-                </div>
+            <div class="transparent_inputBox">
+                <input type="text" name="id" required="">
+                <label>ID</label>
             </div>
-            <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" placeholer="Please your password">
-                </div>
-            </div> -->
-            
+            <div class="transparent_inputBox">
+                <input type="password" name="pw" required="">
+                <label>Password</label>
+            </div>
+            <div style="text-align:center;">
+                <button type="submit" class="btn btn-primary" style="text-align:center;"> OK</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='/index.php'">처음으로</button>
+            </div>
 
-
-            <div class="form-group">
-            <h4>Login</h4>
-            </div>
-            <p>ID</p><input type="text" class="form-control" name ="id"><br />
-            </div>
-            <div class="form-group row">
-            <p>PASSWORD</p><input type="text"  class="form-control"name="pw"><br />
-            </div>
-            <div class="form-group">
-            <button type="submit" class="btn btn-primary"> Submit</button>
+            <div style="text-align:right;">
+                <a href="/register" style="color:#337ab7">회원가입</a>
             </div>
         </form>
     </div>

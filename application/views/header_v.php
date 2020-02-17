@@ -8,16 +8,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
         <!-- <link type="text/css" rel='stylesheet' href="/todo/include/css/bootstrap.css" /> -->
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/style.css">
 
         <!-- bootstrap cdn -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-        <script src="/public/js/ckeditor2/ckeditor.js"></script>
-        <script src="/js/sample.js" type="text/javascript"></script>    
-
+        <!-- <script src="/public/js/ckeditor2/ckeditor.js"></script> -->
+        <script src="/js/sample.js" type="text/javascript"></script>   
+        <!-- <link rel="stylesheet" type="text/css" href="/css/style.css"> -->
+        <link rel="stylesheet" href="/css/board.css" type="text/css">
 
         <script>
             $(function() {
@@ -38,33 +38,46 @@
             }); 
         </script>
     </head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="header-section1"></div>
+            <div class="header-section2"></div>
+            <div class="nav-horizon">
+                <ul>
+                    <li><a href="/android" style="margin-left:5px;">안드로이드</a></li>
+                    <li><a href="/login">로그인</a></li>
+                    <li><a class="active" href="/main/board">게시판</a></li>
+                    <li><a href="/template">탬플릿</a></li>
+                    <li><a href="#">샘플</a></li>
+                </ul>
+            </div>
+            <?php                
+                    $url = uri_string();
+                    $url_string = explode('/', $url);
+                    $url = $url_string[0];
+                ?>
+                
+                <form action="">
+                    <input type="hidden" id="user_status_isset" name="user_status_isset" value="<?=isset($_SESSION['user_status'])?>">
+                    <input type="hidden" id="user_status" name="user_status" value="<?=$_SESSION['user_status']?>">
+                    <input type="hidden" id="user_nickname" name="user_nickname" value="<?=$_SESSION['user_nickname']?>">
+                    <input type="hidden" id="url_pattern" name="url_pattern" value="<?=$url;?>">
+                </form>
 
-    <body>
-        <div id="main">
-            <header id="header" data-role="header" data-position="fixed">
-                <blockquote>
-                    <p>
-                        Create Board Using CodeIgniter
-                    </p>
-                    <small>Execute example</small>
-                </blockquote>
-            </header>
+                <p id="context"></p>
 
             <?php
                 $url = uri_string();
                 $url_string = explode('/', $url);
                 $url = $url_string[0];
-                
-                // session_start();
 
-                /**
-                 * ! Login
-                 */
+                // session_start();
                 //사용자 세션 정보가 있을 때,
                 if(isset($_SESSION['user_status'])){
                     if($_SESSION['user_status']){
                         $user_print = '
-                        <div class="container">
+                        <div class="userinfo">
                             <div class="col-row align-items-center">
                                 <div class="col-sm-2 btn btn-light discable">
                                     사용자
@@ -77,7 +90,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="margin-bottom:20px;"></div>
                         ';
                         $auth_print = 0;
                     }else{
@@ -89,14 +101,16 @@
                     $auth_print = 1;
                 }
 
-                // echo ("<script language=javascript>header_print($url, $user_print, $auth_print);</script>");
+                // $user_print = "<script>document.write(strHtml);</script>";
+                // $auth_print = "<script>document.write(auth_print);</script>";
 
-               /*  if($url == ''){
+                //button
+                if($url == ''){
                     echo $user_print;
                     if($auth_print){
                         echo '
-                        <a href="/login"    class="btn btn-primary">로그인</a>
-                        <a href="/register" class="btn btn-primary">회원가입</a>
+                        <a href="/login"    class="btn btn-primary header-btn">로그인</a>
+                        <a href="/register" class="btn btn-primary header-btn">회원가입</a>
                         </div>
                         ';
                     }else{
@@ -104,10 +118,9 @@
                 }
                 else if($url == 'main'){        
                     echo $user_print;
-                    //main page
                     echo '
-                        <a href="/login"    class="btn btn-primary">로그인</a>
-                        <a href="/register" class="btn btn-primary">회원가입</a>
+                        <a href="/login"    class="btn btn-primary header-btn">로그인</a>
+                        <a href="/register" class="btn btn-primary header-btn">회원가입</a>
                         ';
                 }
                 else if($url == 'login'){        
@@ -115,68 +128,50 @@
                     if($auth_print){
                         
                         echo '
-                        <a href="/register"  class="btn btn-primary">회원가입</a>
-                        <a href="/index.php" class="btn btn-primary">목록보기</a>
+                        <a href="/register"  class="btn btn-primary header-btn">회원가입</a>
+                        <a href="/index.php" class="btn btn-primary header-btn">목록보기</a>
                         ';
                     }else{
-                        //login 상태
                         echo '
-                        <a href="/index.php" class="btn btn-primary">목록보기</a>
+                        <a href="/index.php" class="btn btn-primary header-btn">목록보기</a>
                         ';
                     }
                 }
                 else if($url == 'register'){
                     echo $user_print;
                     echo '
-                    <a href="/main/board" class="btn btn-primary">목록보기</a>
+                    <a href="/main/board" class="btn btn-primary header-btn">목록보기</a>
                     ';
                 }
                 else if($url == 'info'){
                     echo $user_print;
                     echo '
-                    <a href="/index.php" class="btn btn-primary">목록보기</a> 
-                    <a href="/process/logout" class="btn btn-primary">로그아웃</a> 
-                    <a href="/process/withdrawal" class="btn btn-primary">회원탈퇴</a>
+                    <a href="/index.php" class="btn btn-primary header-btn">목록보기</a> 
+                    <a href="/process/logout" class="btn btn-primary header-btn">로그아웃</a> 
+                    <a href="/process/withdrawal" class="btn btn-primary header-btn">회원탈퇴</a>
                     ';
                 }else if ($url == 'post'){
                     echo $user_print;
                     echo '
-                    <a href="/index.php" class="btn btn-primary">목록보기</a>
+                    <a href="/index.php" class="btn btn-primary header-btn">목록보기</a>
                     ';
                 }
                 else if ($url == 'write'){
                     echo $user_print;
                     echo '
-                    <a href="/index.php" class="btn btn-primary">목록보기</a>
+                    <a href="/index.php" class="btn btn-primary" style="float:right;">목록보기</a>
                     ';
                 }
                 else if ($url == 'edit'){
                     echo $user_print;
                     echo '
-                    <a href="/index.php class="btn btn-primary"">목록보기</a>
+                    <a href="/index.php class="btn btn-primary"  style="float:right;">목록보기</a>
                     ';
-                } */
+                }
             ?>
-
-        </div>
-        <nav class="clearfix" id="nav_print">
-            <!-- <ul class="clearfix">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">How-to</a></li>
-                <li><a href="#">Icons</a></li>
-                <li><a href="#">Design</a></li>
-                <li><a href="#">Web 2.0</a></li>
-                <li><a href="#">Tools</a></li>  
-            </ul>
-            <a href="#" id="pull">Menu</a> -->
-        </nav>
-
-        <?php
-            echo ("<script language=javascript>nav_print();</script>");
-        ?>
-
-        <div id="sub_div2"></div>
-        <button onclick="nav_print();">nav</button>
-
-    </body>
+        </header>
+    </div>
+</body>
+                
+    <script>var type = "<?php echo $url?>"; console.log(type);</script>
 </html>

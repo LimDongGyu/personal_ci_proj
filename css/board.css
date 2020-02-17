@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700");
+
+* {font-family: 'Open Sans', sans-serif; box-sizing: border-box; color: #ffffff; font-size: 100%; line-height: 1.5;}
+/*
+body {margin: 0; background-size: cover;}
+nav {--duration: .5s; --easing: ease-in-out; position: relative; width: 220px; margin: 20px;}
+nav ol {list-style-type: none; margin: 0; padding: 0;}
+nav li {margin: -4px 0 0 0;}
+nav a {display: block; text-decoration: none; background: #fff; transform-origin: 0 0; transition: transform var(--duration) var(--easing), color var(--duration) var(--easing); transition-delay: var(--delay-out); border-radius: 4px; padding: 1em 1.52em;}
+nav a:hover {background: #efefef;}
+nav .sub-menu a {font-size: .9em; color: #666666; border-left: 2em solid white; padding: .75em; background: linear-gradient(to right, #dddddd 2px, #ffffff 2px);}
+nav .sub-menu a:hover {background: linear-gradient(to right, #dddddd 2px, #efefef 2px);}
+nav header {font-weight: 600; display: block; background: rgba(255, 255, 255, 0.5); transform-origin: 0 0; transition: transform var(--duration) var(--easing), color var(--duration) var(--easing); transition-delay: var(--delay-out); border-radius: 4px; padding: 1em 1.52em;}
+nav header span {border: none; background: transparent; font-size: 1.5em; padding: 0; cursor: pointer; line-height: 1; float: right;}
+nav footer button {position: absolute; top: 0; left: 0; border: none; padding: calc(1em - 2px); width: 100%; transform-origin: 0 0; transition: transform var(--duration) var(--easing); transition-delay: calc(var(--duration) + (.1s * (var(--count) / 2)));cursor: pointer; outline: none; background: #cdcdcd; opacity: 0;}
+nav.closed a,
+nav.closed header {transform: translateY(calc(var(--top) * -1)) scaleY(0.1) scaleX(0.2); transition-delay: var(--delay-in); color: transparent;}
+nav.closed footer button {transition-delay: 0s; transform: scaleY(0.7) scaleX(0.2);}
+*/
+
+
+
+
+/* login Page */
+body{margin: 0; padding: 0; font-family: sans-serif; background-size: cover;}
+.transparent_box{ position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; /* height: 480px; */ padding: 40px; background: rgba(0,0,0,0.8); box-sizing: border-box; box-shadow: 0 15px 25px rgba(0,0,0,0.5); border-radius: 10px;}
+.transparent_box h2{margin: 0 0 30px; padding: 0; color: #fff; text-align: center;}
+.transparent_box .transparent_inputBox{position: relative;}
+.transparent_box .transparent_inputBox input{width: 100%; padding: 10px 0; font-size: 16px; color: #fff; border: none; letter-spacing: 1px; margin-bottom: 30px; border-bottom: 1px solid #fff; outline: none; background: transparent;}
+.transparent_box .transparent_inputBox label{position: absolute; top: 0; left: 0; padding: 10px 0; font-size: 16px; color: #fff; pointer-events: none; transition: 0.5s;}
+.transparent_box .transparent_inputBox input:focus ~ label,
+.transparent_box .transparent_inputBox input:valid ~ label{top: -18px; left: 0; color: #03a9f4; font-size: 12px;}
+.transparent_box input[type="submit"]{ background: transparent; border: none; outline: none; color: #fff; background: #03a9f4; padding: 10px 20px; cursor: pointer; border-spacing: 5px;}
+
+
+/* template */
+header{height:150px;}
+.header-userinfo{height:100px;}
+.wrapper{width:100%; overflow:auto}
+.header-section1{height:50px; background-color:#333333}
+.header-section2{height:50px; background-color: #eeeeee;}
+.nav-horizon{height:50px; background-color:#242424}
+.nav-side{width:20%; height: 750px; overflow:auto; float:left; background-color:#eeeeee}
+.container{width:100%; overflow:auto; margin:0; padding:0px;}
+.section{width:70%; height:750px; overflow:auto; background-color:#424242; float:left;}
+.aside{width:10%; height:750px; float:left;; background-color:#eeeeee}
+footer{width:100%; height:100px; background-color:#959595}
+
+.nav-horizon{height:54px; background-color: #f7f7f7}
+.nav-horizon ul{list-style-type: none; padding: 0; overflow: hidden; background-color: #f7f7f7; height:54px; margin-bottom:0px; border-bottom:1px solid #bbbbbb;}
+.nav-horizon li{float: left;}
+.nav-horizon li a{display: block; color: gray; text-align: center; padding: 14px 16px; text-decoration: none; margin-right:20px;}
+.nav-horizon li a:hover{color: #333;}
+.nav-horizon li .active{border-bottom: 2px solid #3ddc84;}
+
+
+.testimonials{width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); grid-gap: 20px; margin-top:20px; margin-bottom:20px; text-align:center;}
+.testimonials .testi_card{position: relative; width: 250px; margin: 0 auto; margin-top: 5px; margin-bottom: 5px; background: #333; padding: 20px; box-sizing: border-box; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.5); overflow: hidden;}
+.testimonials .testi_card .content{z-index: 2; position: relative;}
+.testimonials .testi_card .layer{position: absolute; z-index: 1; top: calc(100% - 2px); left: 0; width: 100%; height: 100%; background: linear-gradient(#03a9f4, #e91ee3); transition: 0.5s;}
+.testimonials .testi_card:hover .layer{top: 0;}
+.testimonials .testi_card .content p{font-size: 14px; line-height: 24px; color: #fff;}
+.testimonials .testi_card .content .details h2{font-size: 14px; color: #fff;}
+.testimonials .testi_card .content .details h2 span{color: #03a9f4; font-size: 11px; transition: 0.5s;}
+.testimonials .testi_card:hover .content .details h2 span{color: #fff;}
+.testimonials .testi_card .content .testi_img{width: 100px; height: 100px; margin: 0 auto; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.5);}
+.testi_img img{width: 100px; height: 100px;}
+
+.nav-side .main{width: 150px; height: 150px; margin: 0 auto; margin-top: 30px; margin-bottom:30px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.5);}
+.nav-side .main img{width: 150px; height: 150px;}
+.nav-side .main-context{width:100%; height:300px;}
+.nav-side .main-context p{text-align:center; color: #444444} 
+
+
+
+.board-container{height:calc(100%-300px); background-color:#000;}

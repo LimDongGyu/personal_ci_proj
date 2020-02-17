@@ -31,7 +31,7 @@ class Main extends CI_Controller {
   
   // login
   function login(){
-    $this->load->view('header_v');
+    // $this->load->view('header_v');
     $this->load->view('login_v');
   }
 
@@ -62,9 +62,7 @@ class Main extends CI_Controller {
     $this->load->helper('url');
 		$this->load->model('board_m');
 		$posts_all = $this->board_m->posts_require_all();
-    // $this->load->view('header_v');
-    $this->load->view('layout_header_v');
-    $this->load->view('layout_nav_v');
+    $this->load->view('header_v');
     $this->load->view('board_v', array('posts_all'=>$posts_all));
   }
 

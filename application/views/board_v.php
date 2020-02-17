@@ -10,12 +10,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="/js/sample.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/style.css">
+    <!-- <link rel="stylesheet" href="/css/board.css" type="text/css"> -->
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
 </head>
 <body>
-
-<div class="container">
+<div class="container" style="height:1000px; margin:0px; padding: 0px;">
+    <div class="nav-side"></div>
+    <div class="section">
     <form action="/" method="GET">
         <div class="form-row align-items-center">
             <div class="col-sm-2">
@@ -40,7 +42,8 @@
                     echo '<div class="col-sm-2"></div></div>';        
                 }
             ?>
-        </form> 
+        </form>
+        
         <?php
 
         if (isset($_GET['q']))
@@ -136,10 +139,7 @@
         }
         ?>
     </div>
-    <button type="button" onclick="test();">sub_div</button>
-    <div class="" id='sub_div'></div>
-    <div class="paging">
-        <p><a href="">1</a></p>
-    </div>
+    <div class="aside"></div>
+</div>
 </body>
 </html>
