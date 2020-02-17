@@ -10,38 +10,50 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="/js/sample.js" type="text/javascript"></script>
-    <!-- <link rel="stylesheet" href="/css/board.css" type="text/css"> -->
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/board.css" type="text/css">
+    <!-- <link rel="stylesheet" href="/css/style.css" type="text/css"> -->
 
 </head>
 <body>
-<div class="container" style="height:1000px; margin:0px; padding: 0px;">
-    <div class="nav-side"></div>
+<div class="container" style="height:750px; margin:0px; padding: 0px;">
+    <div class="nav-side">
+        <div class="main"></div>
+                    <div class="main-context">
+                        <p>사용자 정보</p>
+                        <p>sample</p>
+                        <p>sample</p>
+                        <p>sample</p>
+                        <p>sample</p>
+                        <p>sample</p>
+                        <p>sample</p>
+                        <p>sample</p>
+                    </div>
+        </div>
     <div class="section">
-    <form action="/" method="GET">
-        <div class="form-row align-items-center">
-            <div class="col-sm-2">
-                <h4>검색하기 :</h4>
-            </div>
-            <div class="col-sm-2">
-                <select name="type" class="form-control form-control-sm">
-                    <option value="title" id="sel_title">제목</option>
-                    <option value="desc" id="sel_desc">본문</option>
-                </select>
-            </div>
-            <div class="col-sm-6">
-                <input class="form-control mb-2" type="text" id="question" name="q" value="" class="search">
-            </div>
-            <?php
-                if (isset($_GET['q'])){
-                    echo '
-                        <a class="btn btn-primary"; href="/index.php";>초기화</a>
-                        </div>
-                        ';
-                }else{    
-                    echo '<div class="col-sm-2"></div></div>';        
-                }
-            ?>
+        <form action="/" method="GET">
+            <div class="form-row align-items-center" style="margin-top:50px;">
+                <div class="col-sm-2">
+                    <h4>검색하기 :</h4>
+                </div>
+                <div class="col-sm-2">
+                    <select name="type" class="form-control form-control-sm">
+                        <option value="title" id="sel_title" style="color:#000000">제목</option>
+                        <option value="desc" id="sel_desc" style="color:#000000">본문</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <input class="form-control mb-2" type="text" id="question" name="q" value="" class="search">
+                </div>
+                <?php
+                    if (isset($_GET['q'])){
+                        echo '
+                            <a class="btn btn-primary"; href="/index.php";>초기화</a>
+                            </div>
+                            ';
+                    }else{    
+                        echo '<div class="col-sm-2"></div></div>';        
+                    }
+                ?>
         </form>
         
         <?php
@@ -141,5 +153,6 @@
     </div>
     <div class="aside"></div>
 </div>
+<footer></footer>
 </body>
 </html>

@@ -41,7 +41,18 @@
 <body>
     <div class="wrapper">
         <header>
-            <div class="header-section1"></div>
+            <div class="header-section1">
+                <img src="/img/logo.png" alt="LOGO SAMPLE" class="logo">
+                <nav>
+                    <ul class="nav_links">
+                        <li><a href="/android">Android</a></li>
+                        <li><a href="login">로그인</a></li>
+                        <li><a href="/main/board">게시판</a></li>
+                        <li><a href="/template">탬플릿</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="cta"><button>Contact</button></a>
+            </div>
             <div class="header-section2"></div>
             <div class="nav-horizon">
                 <ul>
@@ -79,7 +90,7 @@
                         $user_print = '
                         <div class="userinfo">
                             <div class="col-row align-items-center">
-                                <div class="col-sm-2 btn btn-light discable">
+                                <div class="col-sm-2 btn btn-light discable" style="color:#000">
                                     사용자
                                 </div>
                                 <div class="col-sm-2 btn btn-light">

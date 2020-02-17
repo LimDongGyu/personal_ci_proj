@@ -14,7 +14,7 @@
         <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
         <script src="/js/sample.js" type="text/javascript"></script>   
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <!-- <link rel="stylesheet" type="text/css" href="/css/style.css"> -->
         <link rel="stylesheet" type="text/css" href="/css/board.css">
 </head>
 <body>

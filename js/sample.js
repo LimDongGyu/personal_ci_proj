@@ -5,23 +5,23 @@ var auth_print = 0;
 // console.log($("#url_pattern").val());
 
 //사용자 세션 체크
-if($("#user_status_isset").val()){
-    if($("#user_status").val()){
-        strHtml += '<div class="userinfo">';
-        strHtml += '<class="col-row align-items-center">';
-        strHtml += '<div class="col-sm-2 btn btn-light discable">사용자</div>';
-        strHtml += '<div class="col-sm-2 btn btn-light"><a href="/info">';
-        strHtml += $("#user_nickname").val();
-        strHtml += '</a></div>';
-        strHtml += '<div class="col-sm-2"> <a class="btn btn-primary btn-block" href="/write">글쓰기</a></div></div></div>';
-        strHtml += '<div style="margin-bottom:20px;"></div>';
-        auth_print = 0;
-    }else{
-        strHtml = '';
-        auth_print = 1;
-    }
-    // $('p#context').html(strHtml);
-}
+// if($("#user_status_isset").val()){
+//     if($("#user_status").val()){
+//         strHtml += '<div class="userinfo">';
+//         strHtml += '<class="col-row align-items-center">';
+//         strHtml += '<div class="col-sm-2 btn btn-light discable">사용자</div>';
+//         strHtml += '<div class="col-sm-2 btn btn-light"><a href="/info">';
+//         strHtml += $("#user_nickname").val();
+//         strHtml += '</a></div>';
+//         strHtml += '<div class="col-sm-2"> <a class="btn btn-primary btn-block" href="/write">글쓰기</a></div></div></div>';
+//         strHtml += '<div style="margin-bottom:20px;"></div>';
+//         auth_print = 0;
+//     }else{
+//         strHtml = '';
+//         auth_print = 1;
+//     }
+//     // $('p#context').html(strHtml);
+// }
 
 
 function header_print(url, user_print, auth_print){
