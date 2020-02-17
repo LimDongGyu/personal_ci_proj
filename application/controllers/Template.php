@@ -24,7 +24,7 @@ class Template extends CI_Controller {
     }
 
     public function page(){
-        $this->load->view('header_v');
+        // $this->load->view('header_v');
         $this->load->view('template_v');
     }
 }
