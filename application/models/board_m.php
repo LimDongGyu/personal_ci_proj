@@ -10,9 +10,9 @@
             parent::__construct();
         }
 
+
         function get_list($table = 'ci_board', $type = '', $offset = '', $limit = '') {
             $limit_query = '';
-
             $table_name = 'ci_board';
 
             if ($limit != '' OR $offset != '') {
@@ -31,9 +31,9 @@
             }
             return $result;
         }
-
+        
         public function posts_require_all(){
-            return $this->db->query("SELECT * FROM `posts` ORDER BY id_key DESC")->result();
+            return $this->db->query("SELECT * FROM `posts` ORDER BY id_key")->result();
         }
         public function posts_require($id){
             return $this->db->query("SELECT * FROM `posts` WHERE id_key = '$id'")->result();
@@ -43,6 +43,15 @@
         }
         public function posts_require_user($id){
             return $this->db->query("SELECT * FROM `posts` WHERE uploader_id = '$id'")->result();
-        }  
+        }
+
+        
+        public function posts_paging($limit, $offset){
+            /* 
+            $sql = "SELECT * FROM `posts`";
+            $row_num = $this->db->query($sql)->num_rows(); */
+
+            return $this->db->query("SELECT * FROM `posts` ORDER BY id_key LIMIT ? OFFSET ?");
+        }
     }
 ?>

@@ -4,7 +4,7 @@ var auth_print = 0;
 
 // console.log($("#url_pattern").val());
 
-//사용자 세션 체크
+// 사용자 세션 체크
 // if($("#user_status_isset").val()){
 //     if($("#user_status").val()){
 //         strHtml += '<div class="userinfo">';
@@ -20,7 +20,7 @@ var auth_print = 0;
 //         strHtml = '';
 //         auth_print = 1;
 //     }
-//     // $('p#context').html(strHtml);
+//     $('p#context').html(strHtml);
 // }
 
 

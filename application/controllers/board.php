@@ -46,7 +46,7 @@ class Board extends CI_Controller {
         $this -> load -> library('pagination');
 
         // 페이지 네이션 설정
-        $config['base_url'] = '/bbs/board/lists/ci_board/page';
+        $config['base_url'] = '/board/lists/ci_board/page';
         // 페이징 주소
         $config['total_rows'] = $this -> board_m -> get_list($this -> uri -> segment(3), 'count');
         // 게시물 전체 개수

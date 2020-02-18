@@ -34,8 +34,8 @@ body{margin: 0; padding: 0; font-family: sans-serif; background-size: cover;}
 
 
 /* template */
-header{height:150px;}
-.header-userinfo{height:100px;}
+header{height:auto;}
+.header-userinfo{height:auto;}
 .wrapper{width:100%; overflow:auto}
 .header-section1{height:50px; background-color:#333333; display:flex; justify-content: flex-end; align-items:center; padding:30px 10%}
 .header-section1 li, a, button{font-family: "Roboto"; font-weight:500; font-size:16px; color:#edf0f1; text-decoration: none;}
@@ -51,8 +51,8 @@ header{height:150px;}
 .header-section2{height:50px; background-color: #eeeeee;}
 .nav-horizon{height:50px; background-color:#242424}
 .nav-side{width:20%; height: 750px; overflow:auto; float:left; background-color:#eeeeee}
-.container{width:100%; overflow:auto; margin:0; padding:0px;}
-.section{width:70%; height:750px; overflow:auto; background-color:#424242; float:left;}
+.container{width:100%; overflow:auto; margin:0; padding:0px; color:#000000;}
+.section{width:70%; height:750px; overflow:auto; background-color:#ffffff; float:left;}
 .aside{width:10%; height:750px; float:left;; background-color:#eeeeee}
 footer{width:100%; height:100px; background-color:#959595}
 
@@ -84,3 +84,15 @@ footer{width:100%; height:100px; background-color:#959595}
 
 
 .board-container{height:calc(100%-300px); background-color:#000;}
+
+.container p, .container a, .container td, .container th{color:#000000;}
+.line strong, span{color:#000000};
+.table-border{border: 1px solid #dddddd; border-collapse:collapse;}
+.table-border th, tr, td{border: 1px solid #dddddd;}
+.table-border th{text-align:center;}
+
+.align-items-center h4{color:#000}
+
+.btn-right{float:right; width:auto;}
+.userinfo{height:34px;}
+.userinfo .userinfo-nickname, .userinfo .userinfo-text{float:right; color:#000000; text-align:center; margin-right:20px; height:34px;}

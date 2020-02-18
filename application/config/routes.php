@@ -68,7 +68,7 @@ $route['post/(:num)']               = "main/post/$1";
 $route['android']                   = 'android/page';
 $route['template']                  = 'template/page';
 
-
+//DB process
 $route['/process/login']            = 'process/login';
 $route['/process/logout']           = 'process/logout';
 $route['/process/register']         = 'process/register';

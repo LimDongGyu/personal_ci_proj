@@ -5,7 +5,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <title>Test Board</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
         <!-- <link type="text/css" rel='stylesheet' href="/todo/include/css/bootstrap.css" /> -->
 
@@ -63,20 +63,23 @@
                     <li><a href="#">샘플</a></li>
                 </ul>
             </div>
+            
             <?php                
-                    $url = uri_string();
-                    $url_string = explode('/', $url);
-                    $url = $url_string[0];
-                ?>
-                
-                <form action="">
-                    <input type="hidden" id="user_status_isset" name="user_status_isset" value="<?=isset($_SESSION['user_status'])?>">
-                    <input type="hidden" id="user_status" name="user_status" value="<?=$_SESSION['user_status']?>">
-                    <input type="hidden" id="user_nickname" name="user_nickname" value="<?=$_SESSION['user_nickname']?>">
-                    <input type="hidden" id="url_pattern" name="url_pattern" value="<?=$url;?>">
-                </form>
+                $url = uri_string();
+                $url_string = explode('/', $url);
+                $url = $url_string[0];
 
-                <p id="context"></p>
+                $strHtml ='';
+
+                if(isset($_SESSION['user_status'])){
+                    $strHtml.='<form action=""><input type="hidden" id="user_status_isset" name="user_status_isset" value="'.isset($_SESSION['user_status']).'">';
+                    $strHtml.='<input type="hidden" id="user_status" name="user_status" value="'.$_SESSION['user_status'].'">';
+                    $strHtml.='<input type="hidden" id="user_nickname" name="user_nickname" value="'.$_SESSION['user_nickname'].'">';
+                    $strHtml.='<input type="hidden" id="url_pattern" name="url_pattern" value="'.$url.'">';
+                    $strHtml.='</form><div id="context"></div>';
+                    echo $strHtml;
+                }
+            ?>
 
             <?php
                 $url = uri_string();
@@ -87,21 +90,14 @@
                 //사용자 세션 정보가 있을 때,
                 if(isset($_SESSION['user_status'])){
                     if($_SESSION['user_status']){
-                        $user_print = '
+
+                        $user_print ='
                         <div class="userinfo">
-                            <div class="col-row align-items-center">
-                                <div class="col-sm-2 btn btn-light discable" style="color:#000">
-                                    사용자
-                                </div>
-                                <div class="col-sm-2 btn btn-light">
-                                    <a href="/info">'.$_SESSION['user_nickname'].'</a>
-                                </div>
-                                <div class="col-sm-2">
-                                    <a class="btn btn-primary btn-block"; href="/write">글쓰기</a>
-                                </div>
-                            </div>
-                        </div>
+                            <a class="btn btn-primary btn-block btn-right"; href="/write">글쓰기</a>
+                            <div class="userinfo-nickname"><a href="/info" style="color:#000000;">'.$_SESSION['user_nickname'].'</a></div>
+                            <div class="userinfo-text">사용자명</div>
                         ';
+
                         $auth_print = 0;
                     }else{
                         $user_print = '';
@@ -111,11 +107,6 @@
                     $user_print = '';
                     $auth_print = 1;
                 }
-
-                // $user_print = "<script>document.write(strHtml);</script>";
-                // $auth_print = "<script>document.write(auth_print);</script>";
-
-                //button
                 if($url == ''){
                     echo $user_print;
                     if($auth_print){
@@ -131,7 +122,7 @@
                     echo $user_print;
                     echo '
                         <a href="/login"    class="btn btn-primary header-btn">로그인</a>
-                        <a href="/register" class="btn btn-primary header-btn">회원가입</a>
+                        <a href="/register" class="btn btn-primary header-btn">회원가입</a><div>
                         ';
                 }
                 else if($url == 'login'){        
@@ -140,18 +131,18 @@
                         
                         echo '
                         <a href="/register"  class="btn btn-primary header-btn">회원가입</a>
-                        <a href="/index.php" class="btn btn-primary header-btn">목록보기</a>
+                        <a href="/index.php" class="btn btn-primary header-btn">목록보기</a></div>
                         ';
                     }else{
                         echo '
-                        <a href="/index.php" class="btn btn-primary header-btn">목록보기</a>
+                        <a href="/index.php" class="btn btn-primary header-btn">목록보기</a></div>
                         ';
                     }
                 }
                 else if($url == 'register'){
                     echo $user_print;
                     echo '
-                    <a href="/main/board" class="btn btn-primary header-btn">목록보기</a>
+                    <a href="/main/board" class="btn btn-primary header-btn">목록보기</a></div>
                     ';
                 }
                 else if($url == 'info'){
@@ -159,30 +150,28 @@
                     echo '
                     <a href="/index.php" class="btn btn-primary header-btn">목록보기</a> 
                     <a href="/process/logout" class="btn btn-primary header-btn">로그아웃</a> 
-                    <a href="/process/withdrawal" class="btn btn-primary header-btn">회원탈퇴</a>
+                    <a href="/process/withdrawal" class="btn btn-primary header-btn">회원탈퇴</a></div>
                     ';
                 }else if ($url == 'post'){
                     echo $user_print;
                     echo '
-                    <a href="/index.php" class="btn btn-primary header-btn">목록보기</a>
+                    <a href="/index.php" class="btn btn-primary header-btn">목록보기</a></div>
                     ';
                 }
                 else if ($url == 'write'){
                     echo $user_print;
                     echo '
-                    <a href="/index.php" class="btn btn-primary" style="float:right;">목록보기</a>
+                    <a href="/index.php" class="btn btn-primary" style="float:left;">목록보기</a></div>
                     ';
                 }
                 else if ($url == 'edit'){
                     echo $user_print;
                     echo '
-                    <a href="/index.php class="btn btn-primary"  style="float:right;">목록보기</a>
+                    <a href="/index.php class="btn btn-primary"  style="float:left;">목록보기</a></div>
                     ';
                 }
             ?>
         </header>
     </div>
 </body>
-                
-    <script>var type = "<?php echo $url?>"; console.log(type);</script>
 </html>
