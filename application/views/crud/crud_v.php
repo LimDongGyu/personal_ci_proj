@@ -26,6 +26,8 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
         Add
     </button>
+    <br>
+    <br>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,6 +62,7 @@
                         <input type="text" class="form-control" name="bio" aria-describedby="emailHelp" placeholder="Enter email">
                     </div>
                     <button type="submit" class="btn btn-primary" value="save">Submit</button>
+                    <a href="<?php echo site_url('Crud')?>"><button stype="button" class="btn btn-danger">Cancel</button></a>
                 </form>
             </div>
             <div class="modal-footer">
@@ -84,23 +87,35 @@
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                    foreach($result as $row){ ?>
 
                 <tr>
-                <th scope="row"><?php echo $row->id;?></th>
-                <td><?php echo $row->lastName;?></td>
-                <td><?php echo $row->firstName;?></td>
-                <td><?php echo $row->birthdate;?></td>
-                <td><?php echo $row->contactNo;?></td>
-                <td><?php echo $row->bio;?></td>
-                <td>actions</td>
-                </tr>
-                
-                <?php } ?>
+                <?php
+                    $strHtml = '';
+                    foreach ($result as $row){
+                        $id = $row->id;
+                        $lastName = $row->lastName;
+                        $firstName = $row->firstName;
+                        $birthdate = $row->birthdate;
+                        $contactNo = $row->contactNo;
+                        $bio = $row->bio;
+
+                        $strHtml .='<tr><td scope="row">'.$id.'</td>';
+                        $strHtml .= '<td>'.$lastName.'</td>';
+                        $strHtml .= '<td>'.$firstName.'</td>';
+                        $strHtml .= '<td>'.$birthdate.'</td>';
+                        $strHtml .= '<td>'.$contactNo.'</td>';
+                        $strHtml .= '<td>'.$bio.'</td>';
+                        $strHtml .= '<td><a href="/Crud/edit/'.$row->id.'" class="btn btn-primary">Edit</a>';
+                        $strHtml .= '<a href="/Crud/delete/'.$row->id.'" class="btn btn-danger">Delete</a>';
+                        $strHtml .= "</td></tr>";
+                    }
+                    echo $strHtml;
+                ?>
             </tbody>
         </table>
+        <?php
+            echo $this->pagination->create_links();
+        ?>
     </div>
-
 </body>
 </html>
