@@ -42,7 +42,7 @@
     <div class="wrapper">
         <header>
             <div class="header-section1">
-                <img src="/img/logo.png" alt="LOGO SAMPLE" class="logo">
+                <img src="/images/logo.png" alt="LOGO SAMPLE" class="logo" style="height:50px;">
                 <nav>
                     <ul class="nav_links">
                         <li><a href="/android">Android</a></li>
@@ -51,7 +51,7 @@
                         <li><a href="/template">탬플릿</a></li>
                     </ul>
                 </nav>
-                <a href="#" class="cta"><button>Contact</button></a>
+                <a href="#" class="cta"><button class="blue-btn">Contact</button></a>
             </div>
             <div class="header-section2"></div>
             <div class="nav-horizon">
@@ -94,10 +94,9 @@
                         $user_print ='
                         <div class="userinfo">
                             <a class="btn btn-primary btn-block btn-right"; href="/write">글쓰기</a>
-                            <div class="userinfo-nickname"><a href="/info" style="color:#000000;">'.$_SESSION['user_nickname'].'</a></div>
+                            <div class="userinfo-nickname"><a href="/info" style="color:#ffffff;">'.$_SESSION['user_nickname'].'</a></div>
                             <div class="userinfo-text">사용자명</div>
                         ';
-
                         $auth_print = 0;
                     }else{
                         $user_print = '';
@@ -111,26 +110,29 @@
                     echo $user_print;
                     if($auth_print){
                         echo '
-                        <a href="/login"    class="btn btn-primary header-btn">로그인</a>
+                        <a href="/login" class="btn btn-primary header-btn">로그인</a>
                         <a href="/register" class="btn btn-primary header-btn">회원가입</a>
                         </div>
                         ';
                     }else{
                     }
                 }
-                else if($url == 'main'){        
-                    echo $user_print;
-                    echo '
-                        <a href="/login"    class="btn btn-primary header-btn">로그인</a>
+                else if($url == 'main' || $url == 'main/board'){   
+                    if(isset($_SESSION['user_status'])){
+                        echo $user_print;
+                    }else{
+                        echo $user_print;                        
+                        echo '
+                        <a href="/login" class="btn btn-primary header-btn">로그인</a>
                         <a href="/register" class="btn btn-primary header-btn">회원가입</a><div>
                         ';
+                    }
                 }
                 else if($url == 'login'){        
                     echo $user_print;
                     if($auth_print){
-                        
                         echo '
-                        <a href="/register"  class="btn btn-primary header-btn">회원가입</a>
+                        <a href="/register" class="btn btn-primary header-btn">회원가입</a>
                         <a href="/index.php" class="btn btn-primary header-btn">목록보기</a></div>
                         ';
                     }else{
@@ -154,9 +156,9 @@
                     ';
                 }else if ($url == 'post'){
                     echo $user_print;
-                    echo '
+                    /* echo '
                     <a href="/index.php" class="btn btn-primary header-btn">목록보기</a></div>
-                    ';
+                    '; */
                 }
                 else if ($url == 'write'){
                     echo $user_print;
@@ -166,9 +168,9 @@
                 }
                 else if ($url == 'edit'){
                     echo $user_print;
-                    echo '
-                    <a href="/index.php class="btn btn-primary"  style="float:left;">목록보기</a></div>
-                    ';
+                    /* echo '
+                    <a href="/index.php" class="btn btn-primary" style="float:left;">목록보기</a></div>
+                    '; */
                 }
             ?>
         </header>

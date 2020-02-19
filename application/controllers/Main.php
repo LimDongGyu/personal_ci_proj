@@ -53,12 +53,45 @@ class Main extends CI_Controller {
 		$this->load->view('info_v', array('posts_user'=>$posts_user));
   }
 
-  function board(){
-    $this->load->helper('url');
+  public function board($offset=0){
+    
     $this->load->model('board_m');
-    $posts_all = $this->board_m->posts_require_all();
+
+    /* pagination */
+    $this->load->library('pagination');
+    $config['base_url'] = site_url('/main/board/');
+    $config['total_rows'] = $this->board_m->countAll();
+    $config['per_page'] = 10;
+    $config['num_links'] = 1;
+    $config['first_link'] = '처음으로';
+    $config['last_link'] = '끝으로';
+    $config['prev_link'] = '이전페이지';
+    $config['next_link'] = '다음페이지';
+
+    $config['first_tag_open'] = '<span class="paging">';
+    $config['first_tag_close'] = '</span>';
+    $config['prev_tag_open'] = '<span class="paging">';
+    $config['prev_tag_close'] = '</span>';
+    $config['next_tag_open'] = '<span class="paging">';
+    $config['next_tag_close'] = '</span>';
+    $config['last_tag_open'] = '<span class="paging">';
+    $config['last_tag_close'] = '</span>';
+    $config['full_tag_open'] = '<div style="text-align:center;">';
+    $config['full_tag_close'] = '</div>';
+    $config['num_tag_open'] = '<div class="btn btn-primary" style="height:34px; margin-left:2px; margin-right:2px;">';
+    $config['num_tag_close'] = '</div>';
+    $config['cur_tag_open'] = '<b class="btn btn-primary" style="margin-left:2px; margin-right:2px;">';
+    $config['cur_tag_close'] = '</b>';
+
+    //페이지 숨기기
+    // $config['display_pages'] = FALSE;
+
+    $this->pagination->initialize($config);
+
+    // $this->load->helper('url');
+    $posts_all['posts_all'] = $this->board_m->posts_require_all($config['per_page'], $offset);
     $this->load->view('header_v');
-    $this->load->view('board_v', array('posts_all'=>$posts_all));
+    $this->load->view('board_v', $posts_all);
   }
 
   function write(){
@@ -86,8 +119,6 @@ class Main extends CI_Controller {
           )
         );
   }
-
-
 
   /**
      * 목록 불러오기

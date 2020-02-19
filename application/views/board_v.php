@@ -17,19 +17,25 @@
 <body>
 <div class="container" style="height:750px; margin:0px; padding: 0px;">
     <div class="nav-side">
-        <div class="main"></div>
-                    <div class="main-context">
-                        <p>사용자 정보</p>
-                        <p>sample</p>
-                        <p>sample</p>
-                        <p>sample</p>
-                        <p>sample</p>
-                        <p>sample</p>
-                        <p>sample</p>
-                        <p>sample</p>
-                    </div>
+        <div class="main"><img src="/images/creepy-1867707_1920.jpg" alt=""></div>
+        <div class="main-context">
+            <p>사용자 정보</p>
+            <br><br>
+            <div class="main-info"><img src="https://developer.android.com/_static/android/images/logo-twitter.svg?hl=ko" alt="">
+                <p>Twitter.com/@limdg5335</p>
+            </div>
+            <div class="main-info"><img src="https://www.gstatic.com/images/icons/material/product/2x/youtube_48dp.png" alt="">
+                <p>youtube.com/limdg5335</p>
+            </div>
+            <div class="main-info"><img src="https://icons-for-free.com/iconfiles/png/512/twitch-1320194643260954752.png" alt="">
+                <p>twitch.com/#limdg5335</p>
+            </div>
+            <div class="main-info"><img src="https://lh3.googleusercontent.com/proxy/bXwWbcjeOfO8xpAWehgKyGelV2xGNXcVMluxY0N17-GFAKec_6ZKcdjzCwMO0UONMpORLRn9Mp3pQOI9Z8EnorJI4iB93Cr8gE20eGrGOA" alt="">
+                <p>limdg5335@gmail.com</p>
+            </div>
         </div>
-    <div class="section">
+    </div>
+    <div class="section" style="position:relative;">
         <form action="/" method="GET">
         <div class="search-nav" style="height:50px; text-align:center; margin:40px 40px 0px 40px;">
             <div class="search-context" style="width:200px; float:right;"><input type="text" class="form-control mb-2" id="question" name="q" value=""></div>
@@ -42,7 +48,7 @@
             <div class="search-title" style="width:100px; float:right;"><h6 style="color:#000">검색조건</h6></div>    
             <?php
                 if (isset($_GET['q'])){
-                    echo '<a class="btn btn-primary"; href="/index.php";>초기화</a>';
+                    echo '<a class="btn btn-primary" href="/index.php";>초기화</a>';
                 }else{    
                     echo '<div class="col-sm-2"></div>';        
                 }
@@ -99,12 +105,20 @@
                     $strHtml .='</td><td scope="row">'.$uploader_nickname.'</td><td scope="row">'.$time;
                     $strHtml .='</td></tr>';
                 }
-                $strHtml .='</tbody></table>';
+                $strHtml .='</tbody></table></div>';
+                echo $strHtml;
+            ?>
+
+            <?php
+                $strHtml = '<div style="width:100%; position:absolute; bottom:30px; text-align:center;">';
+                echo $strHtml;
+                echo $this->pagination->create_links();
                 $strHtml .='</div>';
                 echo $strHtml;
             }
         ?>
-    </div>
+            </div>
+        </div>
     <div class="aside"></div>
 </div>
 <footer></footer>

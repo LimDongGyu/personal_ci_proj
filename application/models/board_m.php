@@ -32,8 +32,13 @@
             return $result;
         }
         
-        public function posts_require_all(){
-            return $this->db->query("SELECT * FROM `posts` ORDER BY id_key")->result();
+        public function posts_require_all($limit, $offset){
+            $this->db->limit($limit);
+            $this->db->offset($offset);
+            $this->db->order_by('id_key DESC');
+            $query = $this->db->get('posts');
+            return $query->result();
+            // return $this->db->query("SELECT * FROM `posts` ORDER BY id_key")->result();
         }
         public function posts_require($id){
             return $this->db->query("SELECT * FROM `posts` WHERE id_key = '$id'")->result();
@@ -45,13 +50,22 @@
             return $this->db->query("SELECT * FROM `posts` WHERE uploader_id = '$id'")->result();
         }
 
-        
-        public function posts_paging($limit, $offset){
-            /* 
-            $sql = "SELECT * FROM `posts`";
-            $row_num = $this->db->query($sql)->num_rows(); */
+        public function countAll(){
+            $query = $this->db->query('SELECT * FROM `posts`');
+            return $query->num_rows();
+        }
 
-            return $this->db->query("SELECT * FROM `posts` ORDER BY id_key LIMIT ? OFFSET ?");
+        // public function posts_paging($limit, $offset){
+        //     /* 
+        //     $sql = "SELECT * FROM `posts`";
+        //     $row_num = $this->db->query($sql)->num_rows(); */
+
+        //     return $this->db->query("SELECT * FROM `posts` ORDER BY id_key LIMIT ? OFFSET ?");
+        // }
+
+        public function posts_delete_comment($id){
+            $this->db->where('id_key_join', $id);
+            $this->db->delete('comment');
         }
     }
 ?>

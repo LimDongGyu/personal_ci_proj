@@ -77,6 +77,7 @@ $route['/process/write']            = 'process/write';
 $route['/process/edit']             = 'process/edit';
 $route['/process/delete/(:num)']    = 'process/delete/$1';
 $route['/process/comment_write']    = 'process/comment_write';
+$route['/process/comment_delete/(:num)']   = 'process/comment_delete/$1';
 
 //crud
 $route['/crud']                     = 'crud';

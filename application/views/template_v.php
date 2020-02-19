@@ -20,7 +20,18 @@
 <body>
     <div class="wrapper">
         <header>
-            <div class="header-section1"></div>
+            <div class="header-section1">
+                <img src="/images/logo.png" alt="LOGO SAMPLE" class="logo" style="height:50px;">
+                <nav>
+                    <ul class="nav_links">
+                        <li><a href="/android">Android</a></li>
+                        <li><a href="login">로그인</a></li>
+                        <li><a href="/main/board">게시판</a></li>
+                        <li><a href="/template">탬플릿</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="cta"><button class="blue-btn">Contact</button></a>
+            </div>
             <div class="header-section2"></div>
             <div class="nav-horizon">
                 <ul>
@@ -31,19 +42,26 @@
                     <li><a href="#">샘플</a></li>
                 </ul>
             </div>
+            <div class="userinfo"></div>
         </header>
         <div class="container">
             <div class="nav-side">
-                <div class="main"></div>
+                <div class="main"><img src="/images/creepy-1867707_1920.jpg" alt=""></div>
                 <div class="main-context">
                     <p>사용자 정보</p>
-                    <p>sample</p>
-                    <p>sample</p>
-                    <p>sample</p>
-                    <p>sample</p>
-                    <p>sample</p>
-                    <p>sample</p>
-                    <p>sample</p>
+                    <br><br>
+                    <div class="main-info"><img src="https://developer.android.com/_static/android/images/logo-twitter.svg?hl=ko" alt="">
+                        <p>Twitter.com/@limdg5335</p>
+                    </div>
+                    <div class="main-info"><img src="https://www.gstatic.com/images/icons/material/product/2x/youtube_48dp.png" alt="">
+                        <p>youtube.com/limdg5335</p>
+                    </div>
+                    <div class="main-info"><img src="https://icons-for-free.com/iconfiles/png/512/twitch-1320194643260954752.png" alt="">
+                        <p>twitch.com/#limdg5335</p>
+                    </div>
+                    <div class="main-info"><img src="https://lh3.googleusercontent.com/proxy/bXwWbcjeOfO8xpAWehgKyGelV2xGNXcVMluxY0N17-GFAKec_6ZKcdjzCwMO0UONMpORLRn9Mp3pQOI9Z8EnorJI4iB93Cr8gE20eGrGOA" alt="">
+                        <p>limdg5335@gmail.com</p>
+                    </div>
                 </div>
             </div>
             <div class="section">
