@@ -61,14 +61,14 @@
                 {
                     if($_SESSION['user_id'] == $uploader_id){
                         //update, delete btn if session
-                        $strHtml .= '<br /><div style="height:34px; width:100%"><a class="btn btn-primary" style="color:#ffffff; float:right; margin-left:5px;" href="/delete/'.$id.'">삭제하기</a>';
+                        $strHtml .= '<br /><div style="height:34px; width:100%"><a class="btn btn-primary" style="color:#ffffff; float:right; margin-left:5px;" href="/process/delete/'.$id.'">삭제하기</a>';
                         $strHtml .= '<a class="btn btn-primary" style="color:#ffffff; float:right; margin-left:5px;" href="/edit/'.$id.'">수정하기</a>';
                         $strHtml .= '<a class="btn btn-primary" style="color:#ffffff; float:right;" href="/main/board">목록보기</a></div>';
                     }
                     //post table if same user, session
                     $strHtml .= '<br /><div style="width:100%; padding:0 40px 0 40px">';
                     $strHtml .= '<table class="table table-striped table-custom"><thead><tr><th scope="col" style="width:100px;">글 제목</th><th scope="col">글 내용</th><th scope="col" style="width:150px;">작성시간</th></tr></thead>';
-                    $strHtml .= '<tbody><tr><td scope="row">'.$title.'</td><td scope="row">'.$desc.'</td><td scope="row">'.$time.'</td></tr></tbody></table></div>';
+                    $strHtml .= '<tbody><tr><td scope="row">'.$title.'</td><td scope="row"><div style="max-height:300px; color:#000">'.$desc.'</div></td><td scope="row">'.$time.'</td></tr></tbody></table></div>';
                     echo $strHtml;
                 }else{
                     //post table if no session

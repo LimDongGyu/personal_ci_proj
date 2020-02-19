@@ -346,7 +346,6 @@ class Process extends CI_Controller {
 	}
 
 	function comment_write() {
-
 		session_start();
 		if (isset($_SESSION['user_id'])) {
 			$uploader_id = $_SESSION['user_id'];
