@@ -87,7 +87,7 @@
                     <input type="hidden" name="post_id_join" value="<?php echo $id; ?>">
                     <br /><br />
                     <div style="width:100%; padding:0 40px 0 40px; height:auto;">
-                        <span><strong>댓글 작성 : </strong></span><input type="text" name="description" style="width: 100%; height:100px; color:#000000">
+                        <span><strong>댓글 작성 : </strong></span><input type="text" id="comment_box" name="description" style="width: 100%; height:90px; color:#000000">
                     </div>
                 </form>
                 <br /><br />
@@ -106,7 +106,8 @@
 
                     if(isset($_SESSION['user_id'])) {
                         if ($id == $_SESSION['user_id']) {
-                            $strHtml .='<span style="float:right;"><a href="" class="btn btn-primary btn-comment">수정</a><a href="/process/comment_delete/'.$id_key.'" class="btn btn-danger btn-comment">삭제</a></span>';
+                            $strHtml .='<span style="float:right;"><a href="" class="btn btn-primary btn-comment">수정</a>';
+                            $strHtml .= '<a href="/process/comment_delete/'.$id_key.'" class="btn btn-danger btn-comment">삭제</a></span>';
                         }
                     }
                     $strHtml .='</div>';
@@ -117,6 +118,6 @@
         </div>
     <div class="aside"></div>
     </div>
-<footer></footer>
+    <!-- <footer></footer> -->
 </body>
 </html>

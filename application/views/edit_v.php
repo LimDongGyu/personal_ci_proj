@@ -72,7 +72,7 @@
         </div>   
         <div class="aside"></div>
 </div>
-<footer></footer>
+<!-- <footer></footer> -->
 </body>
 
 <script>

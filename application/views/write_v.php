@@ -47,6 +47,7 @@
                         <label for="exampleFormControlTextarea1">본문</label>
                         <textarea class="form-control" id="description" name="description" rows="20"></textarea>
                     </div>
+                    <br />
                     <div style="text-align:center;"><input type="submit" class="btn btn-primary" value="작성완료" class="submit"></div>';
                 </form>
             </div>

@@ -444,7 +444,210 @@
      * [참고] https://github.com/waifung0207/ci_bootstrap_3_demo/blob/master/application/config/pagination.php
      * [참고] http://sample.cikorea.net/ci20/sample_view/class/pagination
      * 
-     * ? table td 글자수 제한
+     * ? table td 높이 제한 -> td 내부에 div 영역 하나 추가해서 div의 제한으로 해결
      * https://m.blog.naver.com/PostView.nhn?blogId=ddvp16&logNo=50171454854&proxyReferer=https%3A%2F%2Fwww.google.com%2F
      * 
      */
+
+    /**
+     * ! 2020-02-20
+     * 
+     * ? 웹팩이란?
+     * https://webclub.tistory.com/635?category=718289
+     * ? SPA(싱글 페이지 애플리케이션) - 사용자의 로그인화면, 로그인후 진입하는 메인화면, 게시글을 작성하는 화면 등 모든 웹서비스에 필요한 화면들이
+     * 모두 index.js에서 불려져 사용되고 있음.
+     * ? npm 사용법
+     * https://poiemaweb.com/nodejs-npm
+     * 
+     * 1. npm 프로그램 설치
+     *  링크 : https://nodejs.org/en/
+     *  버전 : 12.16.1 LTS
+     *    ㄴ [cmd] npm -v   -> 6.13.4
+     *    ㄴ [cmd] node -v  -> 12.16.1
+     * 
+     *  1.1. npm install 명령
+     *    : 옵션을 별도로 지정하지 않으면 지역으로 설치되며, 프로젝트 루트 경로에 node_modules디렉토리가 생성되며 그 안에 패키지가 설치된다.
+     *      지역으로 설치된 패키지는 해당 프로젝트 내에서만 사용 가능하며, 전역으로 설치된 패키지는 모든 프로젝트가 공용할 수 있음
+     * 
+     *    1.1.1. 지역 설치
+     *      [cmd] npm install <패키지명>
+     * 
+     *    1.1.2. 전역 설치
+     *      [cmd] npm install -g <패키지명>
+     * 
+     *    1.1.3. 전역 설치된 패키지 경로
+     *      - 윈도우 : C:/Users/사용자명/AppData/Roaming/npm/node_modules
+     * 
+     *  1.2. 설치된 npm 패키지 사용
+     *    1.2.1. 프로젝트 생성 
+     *      ㄴ C:/사용자명/node 디렉토리 생성
+     *    1.2.2. vscode 등의 에디터 실행
+     *      ㄴ [terminal] C:/사용자명/node> npm init -y
+     *           ㄴ package.json를 생성하여 프로젝트의 패키지 의존성 관리를 하기 위해서 실행하는 명령
+     *           ㄴ 의존성 관리의 필요성 : 프로젝트에서는 많은 패키지를 사용하게 되며, 패키지 버전 등이 빈번하게 업데이트 되므로
+     *                                   프로젝트가 의존하고 있는 패키지를 일괄 관리할 필요가 있음. package.json 파일을 통해서 프로젝트 정보와
+     *                                   패키지 의존성을 관리함(maven의 pom.xml과 유사한 역할을 함)
+     *            ㄴ package.json은 배포(Publish)할 때 반드시 필요한 파일 
+     *    1.2.3. node 패키지 설치
+     *      ㄴ [terminal] C:/사용자명/node> npm install node-emoji
+     *      ㄴ * 주의) 개발 시에만 개발용 의존 패키지를 설치할 때는 --save-dev 혹은 -D 옵션을 사용하여 설치
+     *          ㄴ package.json 에 보면 개발용 의존패키지는 devDependencies에 기록되며, 배포용 패키지는 dependencies에 기록됨
+     *      ㄴ 패키지의 특정 버전을 설치하려고 할 때 명령어(@)
+     *          ㄴ npm install <패키지명>@버전 --> npm install express@1.5.0
+     *    1.2.4. C:/사용자명/node 경로에 index.js 파일 생성
+     *    1.2.5. 다음과 같은 코드 입력
+     *            # node/index.js
+     *            const emoji = require('node-emoji');
+     *            console.log(emoji.emoji.heart);
+     *    1.2.6. [terminal] node index.js 실행
+     *    1.2.7. 확인
+     * 
+     * 
+     * * npm 명령어
+     * 
+     * //package.json 생성
+     * npm init                          : package.json 생성(정보 입력값)
+     * npm init -y                       : package.json 생성(기본 설정값)
+     * 
+     * //패키지 설치
+     * npm install <패키지명>             : 패키지 로컬 설치
+     * npm install -g <패키지명>          : 패키지 전역 설치
+     * npm install --save-dev <패키지명>  : 패키지 개발용 의존용 설치
+     * npm install -D <패키지명>          : 위와 동일
+     * npm install                       : package.json에 설정된 모든 패키지 설치
+     * npm install <패키지명>@버전        : 패키지 특정버전 설치
+     * 
+     * //패키지 제거
+     * npm uninstall <패키지명>           : 로컬 패키지 삭제
+     * npm uninstall -g <패키지명>        : 전역 패키지 삭제
+     * 
+     * //패키지 업데이트
+     * npm update <패키지명>              : 패키지 업데이트
+     * 
+     * //패키지 설치 확인
+     * npm root                           : 로컬 패키지 설치 디렉토리 확인
+     * npm root -g                        : 전역 패키지 설치 디렉토리 확인
+     * npm ls --depth=0                   : 로컬 설치된 패키지 확인
+     * npm ls -g --depth=0                : 전역 설치된 패키지 확인
+     * 
+     * ??
+     * npm start                          : package.json 스크립트 프로퍼티의 start 실행
+     * npm run <script-name>              : package.json 스크립트 프로퍼티의 start 외 스크립트 실행
+     * 
+     * //패키지 정보 확인
+     * npm view <패키지명>                 : 패키지 정보 확인
+     * 
+     * 
+     * 2. webpack
+     * 
+     *  [정리]
+     *   - entry    : webpack을 실행할 대상 파일(최초 진입점)
+     *   - output   : webpack 결과물에 대한 정보를 입력(filename, path 정의)
+     *   - loader   : css, img 등의 js 파일이 아닌 파일을 webpack이 인식할 수 있게 추가하는 속성
+     *   - plugin   : webpack으로 변환한 파일에 추가적인 기능을 더하고 싶을 때,
+     *  
+     *  2.1. 등장배경
+     *    - 파일 단위의 스크립트 모듈의 관리의 필요성
+     *        ㄴ js의 변수 유효 범위는 기본적으로 전역 범위를 갖기 때문에, 다른 스크립트 모듈을 사용 시
+     *           전역변수의 중복 등의 문제가 발생할 수 있음
+     *        ㄴ 그래서 파일 단위로 변수를 관리하기 위해서 이전에는 AMD, CommonJS와 같은 라이브러리로 해결해옴
+     *        ㄴ 따라서 webpack은 이 문제점을 ES6 모듈 문법과 모듈 번들링으로 해결
+     *        ㄴ 또한, 라이브러리 종속 순서를 신경슬 필요가 없게 함
+     *        ㄴ 스코프에 신경쓰지 않고 개발이 가능하도록 함
+     *        ㄴ 모듈 간의 관계를 chunk(코드를 쪼개는 과정에서 생성되는 js 파일 조각) 단위로 나눠 필요시 로딩
+     *    - 웹 개발 작업 자동화 도구
+     *        ㄴ CSS, HTML, JS, 이미지 압축, CSS 전처리기 변환 등을 자동화해주는 도구(Grunt, Gulp)
+     *    - 웹 애플리케이션의 빠른 로딩 속도와 성능
+     *        ㄴ 이전에는 레이지 로딩(Lazy Loading)이 등장했으나, webpack은 미리 로딩하는 것이 아니라 그 때 그때 요청 처리
+     *        ㄴ Code Splitting 기능을 이용해 원하는 모듈을 원하는 타이밍에 로딩 가능
+     *    - 브라우저별 HTTP 요청 숫자의 제약
+     *        ㄴ 브라우저에서 한 번에 서버로 보낼 수 있는 HTTP 요청 숫자의 제약이 있음
+     *        ㄴ webpack에서 성능 최적화를 위해 여러 개의 파일을 하나로 합치면 브라우저별 HTTP 요청 숫자를 줄일 수 있음
+     *
+     *  2.2. 사전준비
+     *    2.2.1. Node.js
+     *    2.2.2. NPM
+     *    2.2.3. CLI(Command Line Interface)
+     * 
+     *  2.3. 사용방법
+     *   https://webclub.tistory.com/636?category=718289
+     * 
+     *  2.4. webpack.config.js(webpack 구성 파일)
+     *    - entry : webpack에서 웹 자원을 변환하기 위해 필요한 최초 진입점
+     *              웹 애플리케이션의 전반적인 구조와 내용이 담겨져 있어야 함. webpack이
+     *              해당 파일을 가지고 웹 애플리케이션에서 사용되는 모듈의 연관 관계를 
+     *              이해하고 분석하기 때문에 애플리케이션을 동작시킬 수 있는 내용이 있어야함
+     *              [예시] https://webclub.tistory.com/636?category=718289
+     *      ㄴ String : 문자열이 들어오는 경우 시작시 로드되는 모듈로 해석
+     *        예시)
+     *          entry{
+     *            main: './src/otherDir/index.js'
+     *          }
+     *      ㄴ Array  : 시작 시 모든 모듈이 로드되며, 마지막 하나가 내보내짐
+     *      ㄴ Object : 다중 항목 번들이 작성
+     *      ㄴ key    : chunk되는 파일의 이름이고, 같은 문자열 또는 배열 가능
+     * 
+     *    - output : 결과물을 내는 설정으로 생성한 모듈 번들을 저장할 위치를 지정할 수 있음
+     *               webpack이 어디에 어떤 이름의 파일, 또 파일들을 가진 번들을 만들지 정의
+     *      ㄴ default : ./dist/main.js
+     * 
+     *  2.5. webpack 명령
+     * 
+     * 
+     * 3. loader
+     *   : webpack은 js 파일만 읽어올 수 있기에, css, img 등을 webpack이 읽을 수 있는 js로 변경해야하는데
+     *    loader가 이 역할을 하게 됨.
+     *    정리하면, webpack이 웹 애플리케이션을 해석 할 때 js 파일이 아닌 웹 자원(html, css, img, fonts)등을
+     *    변환할 수 있도록 도와주는 것
+     * 
+     *  3.1. loader
+     * 
+     *   [참고]https://velog.io/@decody/Webpack-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0-
+     * 
+     *    3.1.1. css loader 적용하고 내부 스타일로 적용하는 방법
+     *      ㄴ npm install -D css-loader style-loader  
+     *      ㄴ 보통 css파일을 내부 스타일로 작성하기 보다는 개별 css 파일을 import 해와서 사용하는 것이 일반적
+     *       => 따라서 css를 js파일에 바로 번들링 하는 것이 아니라, 빌드 시에 별도의 .css파일로 분리하여 import
+     *          해야하는데 이 때 이용하는 것이 plugins임. 아래에서 다룰 예정
+     *    3.1.2. loader 종류
+     *      ㄴ babel, sass, file, vue, ts
+     * 
+     *   * webpack이 실행이 안되는 이유가 fsevent가 최신 버전에는 적용이 안되는 버그가 있음
+     *    따라서, nvm을 설치해서 다른 버전의 node를 사용해볼 예정, 이전에 게시한 글이 있음
+     *      https://bogyum-uncle.tistory.com/22
+     * 
+     * 
+     * 4. plugin
+     *    : webpack의 기본적인 동작에 추가적인 기능을 제공
+     * 
+     *   4.1. loader, plugin 차이점
+     *    : loader는 파일을 해석하고 변환하는 과정에 관여하여 모듈을 처리
+     *      plugin은 해당 결과물의 형태를 바꾸는 역할을 하므로 번들링된 파일을 처리한다는 점
+     *      따라서, 번들된 파일을 압축할 수도 있고 파일 복사, 추출, 별칭 사용 등의 부가 작업 가능
+     *      결론은 파일별 커스텀 기능을 위해 사용함
+     * 
+     *   4.2. 사용방법
+     *      ㄴ plugins 속성에 new 인스턴스 전달해야 함 
+     * 
+     *   4.3. 컴파일된 CSS를 별도의 CSS로 분리하는 방법
+     *      ㄴ 앞선 로더에서 내부스타일 css를 DOM에 주입했다면 css 파일을 추출하는 방법을 진행
+     *     4.3.1. css 추출 위한 플러그인 설치
+     *      ㄴ npm install --save-dev mini-css-extract-plugin
+     */
+
+      /**
+      * ? vue 조건부 렌더링
+      * ? SPA, ROUTING [참고] https://poiemaweb.com/js-spa
+      */
+
+      /**
+       * npm Error fsevent
+       * https://github.com/npm/npm/issues/17671
+       */
+
+        /**
+        * ! docker container(ubuntu)
+        * 
+        * https://www.44bits.io/ko/post/why-should-i-use-docker-container
+        */
+

@@ -46,7 +46,7 @@
                 <nav>
                     <ul class="nav_links">
                         <li><a href="/android">Android</a></li>
-                        <li><a href="login">로그인</a></li>
+                        <li><a href="/login">로그인</a></li>
                         <li><a href="/main/board">게시판</a></li>
                         <li><a href="/template">탬플릿</a></li>
                     </ul>
@@ -128,24 +128,24 @@
                         ';
                     }
                 }
-                else if($url == 'login'){        
+                else if($url == 'login'){     
                     echo $user_print;
                     if($auth_print){
-                        echo '
+                        /* echo '
                         <a href="/register" class="btn btn-primary header-btn">회원가입</a>
                         <a href="/index.php" class="btn btn-primary header-btn">목록보기</a></div>
-                        ';
+                        '; */
                     }else{
-                        echo '
+                        /* echo '
                         <a href="/index.php" class="btn btn-primary header-btn">목록보기</a></div>
-                        ';
+                        '; */
                     }
                 }
                 else if($url == 'register'){
-                    echo $user_print;
-                    echo '
-                    <a href="/main/board" class="btn btn-primary header-btn">목록보기</a></div>
-                    ';
+                    // echo $user_print;
+                    // echo '
+                    // <a href="/main/board" class="btn btn-primary header-btn">목록보기</a></div>
+                    // ';
                 }
                 else if($url == 'info'){
                     echo $user_print;
@@ -156,21 +156,15 @@
                     ';
                 }else if ($url == 'post'){
                     echo $user_print;
-                    /* echo '
-                    <a href="/index.php" class="btn btn-primary header-btn">목록보기</a></div>
-                    '; */
+                    echo '
+                    <a href="/main/board" class="btn btn-primary header-btn">목록보기</a></div>
+                    ';
                 }
                 else if ($url == 'write'){
                     echo $user_print;
-                    echo '
-                    <a href="/index.php" class="btn btn-primary" style="float:left;">목록보기</a></div>
-                    ';
                 }
                 else if ($url == 'edit'){
                     echo $user_print;
-                    /* echo '
-                    <a href="/index.php" class="btn btn-primary" style="float:left;">목록보기</a></div>
-                    '; */
                 }
             ?>
         </header>

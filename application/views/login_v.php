@@ -15,6 +15,16 @@
 <body>
 
 <div class="container" style="background-color:#444444; height:100vh;">
+
+
+    <?php
+        if(isset($_SESSION['user_status'])){
+            //로그인 중인데 로그인 페이지로 접근했을 때, user info 페이지로 이동
+            echo "<script>location.href='/info';</script>";
+        }
+    ?>
+
+
     <div class="transparent_box">
         <h2>Login</h2>
         <form action="/process/login" method="POST">

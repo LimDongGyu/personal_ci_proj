@@ -384,7 +384,6 @@ class Process extends CI_Controller {
 			echo("<script>history.back();</script>");
 			exit();
         }
-		
 		echo("<script>alert('댓글을 작성했습니다.')</script>");
         echo("<script>history.back();</script>");
 	}
@@ -394,7 +393,7 @@ class Process extends CI_Controller {
 		$result = $this->db->query($sql);
         if($result == false) {
             echo("<script>alert('오류가 발생했습니다, 관리자에게 문의해주세요.')</script>");
-            echo("<script>history.back();</script>");
+			echo("<script>history.back();</script>");
             exit();
 		}
 		echo("<script>alert('댓글을 삭제했습니다.')</script>");
