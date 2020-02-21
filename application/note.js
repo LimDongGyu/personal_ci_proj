@@ -267,10 +267,10 @@
       *   - php.ini 파일 때문이었음.
       *   - 이미지에 다시 php.ini 파일을 올려주니까 해결됨
       * 
-      * 1. 프로젝트 php-fpm/conf.d 디렉토리에 php.ini 파일을 넣고 docker-compose up
+      * 1. 프로젝트 php-fpm/conf.d 디렉토리에 php.ini 파일을 넣고 docker-compose up -d
       * 2. docker 이미지에 접속해서 확인
-      *    - docker ps 명령으로 id 확인 후 앞 3글자로 접속
-      *    - docker exec -it [id-3] bash
+      *    - docker ps 명령으로 id 확인 후 프로세스 이름 앞 3글자로 접속
+      *    - docker exec -it [프로세스-3] bash
       
       *    - tail -f "/var/log/..."
       * 
@@ -651,3 +651,157 @@
         * https://www.44bits.io/ko/post/why-should-i-use-docker-container
         */
 
+
+
+      /**
+       * ! 2020-02-21
+       * 
+       * ? Docker
+       *   Docker 설치
+       *   Docker image, container
+       * [설치]https://subicura.com/2017/01/19/docker-guide-for-beginners-2.html
+       * ? webpack
+       *   Node.js
+       *   Npm
+       *   webpack
+       *     ㄴ nvm
+       *     ㄴ webpack.config.js
+       * ? PHP
+       * ? Framwork
+       *   CI
+       *   Laravel
+       *   Vue
+       * ? DB
+       *   Pdo
+       *   GraphQL
+       *   Redis
+       * ? SPA
+       *    ㄴ [참고] https://poiemaweb.com/js-spa
+       * ? SCSS
+       */
+
+       /**
+        * Docker 입문
+        * https://github.com/remotty/documents.docker.co.kr
+        * 
+        * 
+        * 1. Docekr
+        *   1.1. 왜 도커인가?
+        *     : 서비스 운영 환경을 묶어서 손쉽게 배포하고 실행하는 경량 컨테이너 기술
+        * 
+        *    1.1.1. 
+        *     : 새로운 서버에 서비스를 동작시키려면 많은 작업이 필요했음. 예를 들면, php로 만든 서비스를
+        *      동작시키기 위해선 php를 설치하고, php-mysql, php-curl, php-mbstring, php-mcrypt 등을
+        *      설치하고, php 앞단에 nginx 웹서버를 두려면 이를 연결하기 위해서 php-fpm을 설치해야 함
+        * 
+        *       만약에, 새로운 서비스를 만들어 동작하고 싶은데 php 버전이 달라서 돌지 않는다면???
+        * 
+        *       따라서, 도커 컨테이너는 가상의 공간을 만들어 host os와는 별개의 환경에서 프로세스들이 동작
+        *      도커는 가상의 공간을 이미지로 만들어 저장하고 하나의 이미지에서 여러 컨테이너를 생성할 수 있는데
+        *      하나의 이미지를 만들어놓으면 컨테이너는 완전히 독립된 가상 환경에서 실행이 됨.
+        * 
+        *       따라서 컨테이너가 어떻게 구성되어있는지 신경쓸 필요가 없음.
+        * 
+        *     1.1.2. 개발 테스트, 서비스 환경을 하나로 통일해서 효율적으로 관리할 수 있음
+        *     1.1.3. 이전에 사용하던 가상머신은 완전한 컴퓨터로 항상 게스트 OS를 설치해야했음
+        *       ㄴ 이미지 안에 OS가 포함되므로 이미지 용량이 커짐
+        *   
+        *   1.2. 도커의 특징
+        *     1.2.1. guest os를 설치하지 않음
+        *       ㄴ 이미지에 서버 운영을 위한 프로그램, 라이브러리만 격리해서 설치
+        *       ㄴ 이미지 용량이 줄어듦
+        *       ㄴ host와 os 자원(system call 등)을 공유함
+        *     1.2.2. 하드웨어 가상화 계층이 없음
+        *       ㄴ 메모리 접근, 파일 시스템, 네트워크 전송 속도가 가상머신에 비해 빠름
+        *       ㄴ host와 docker container 사이의 성능 차이가 크지 않음
+        *     1.2.3. 이미지 생성과 배포에 특화
+        *       ㄴ 이미지 버전 관리 제공
+        *       ㄴ 중앙 저장소에 이미지를 push/pull
+        *     1.2.4. 다양한 API 제공, 자동화 가능
+        *       ㄴ 개발, 서버 운영에 유용
+        * 
+        *   1.3. 이미지와 컨테이너
+        *     1.3.1. 이미지
+        *       ㄴ 이미지는 서비스 운영에 필요한 서버프로그램, 소스코드, 컴파일된 실행파일을 묶은 형태
+        *       ㄴ 저장소에 올리고 받는건 이미지(push/pull)
+        *     1.3.2. 컨테이너
+        *       ㄴ 컨테이너는 이미지를 실행한 상태
+        *       ㄴ 이미지로 여러 개의 컨테이너를 만들 수 있음
+        *       ㄴ 운영체제로 치면 이미지는 실행파일, 컨테이너는 프로세스
+        * 
+        *   1.4. Docker의 이미지 처리 방식
+        *     : 도커는 이미지의 바뀐 방식을 다음과 같이 처리함
+        *       ㄴ base image에서 바뀐 부분만 이미지로 생성하여 container로 실행할 때, 
+        *          base image와 바뀐 부분을 합쳐서 실행함
+        * 
+        * 2. docker 설치
+        *   [참고] https://www.slideshare.net/pyrasis/docker-fordummies-44424016
+        *   위 링크에서 87번 슬라이드부터 진행
+        * 
+        *        - Dockerfile : 서버구성을 문서화한 것(클래스 정의가 들어있는 파일)
+        *        - docker build : 도커 이미지 만들기(클래스 정의를 어플리케이션에 로드)
+        *        - docker run [option] : 이미지에 붙이는 장식들(인스턴스 변수들)
+        *        - docker run : 장식 붙은 이미지를 실제로 실행(인스턴스 생성)
+        * 
+        *        - docker sarch <이미지 이름> > 이미지 검색
+        *        - docker images > 모든 이미지 출력
+        *        - docker pull [이미지이름]:[태그] > pull 명령으로 이미지 받기
+        *        - docker run -i -t --name [컨테이너이름] ubuntu /bin/bash > run 명령으로 컨테이너 생성하기
+        *        - docker ps -a > 모든 컨테이너 목록 출력
+        *        - docker ps > 실행되고 있는 컨테이너만 출력
+        *        - docker start [컨테이너 이름] > 컨테이너 시작
+        *        - docker restart [컨테이너 이름] > 컨테이너 재시작
+        *        - docker attach [컨테이너 이름] > 컨테이너에 접속
+        *        - docker exe [컨테이너 이름] [명령] [매개 변수] > 외부에서 컨테이너 안의 명령 실행
+        *        - docker stop [컨테이너 이름] > 컨테이너 정지
+        *        - docker rm [컨테이너 이름] > 컨테이너 삭제
+        *        - docker rmi [이미지 이름]:[태그] > 이미지 삭제
+        *        - docker stats > cpu 사용률 등을 보여주기
+        *        
+        *     docker-compose 사용법
+        *       [참고] https://pages.wiserain.com/articles/cheatsheet-docker-compose/
+        *        - docker-compose up -d [서비스 이름, e.g. plex]
+        *        - docker-compose down
+        *        - docker-compose stop [서비스 이름]
+        *        - docker-compose rm [서비스 이름]
+        * 
+        * 
+        * 
+        * [참고] 
+        * https://subicura.com/2017/01/19/docker-guide-for-beginners-2.html
+        * https://www.44bits.io/ko/post/why-should-i-use-docker-container
+        * https://galid1.tistory.com/323?category=763527
+        * https://github.com/AI-Trolls/Docker-Tutorial
+        * https://subicura.com/2016/06/07/zero-downtime-docker-deployment.html
+        * 
+        */
+
+        /**
+         * ! immutable infrastructure
+         *   : host os, 서비스 운영 환경을 분리
+         *      ㄴ 한 번 설정한 운영환경은 변경하지 않는다(immutable)라는 개념
+         * 
+         *      1. 서비스 운영 환경을 이미지로 생성하여 서버에 배포하여 실행
+         *      2. 서비스 업데이트 되면 운영환경 자체를 변경하지 않고, 이미지를 새로 생성하여 배포
+         *   * 서비스 운영환경(서버 프로그램, 소스코드, 컴파일 된 바이너리)
+         */
+      
+    /**
+     * vscode 단축키 : 다중커서(c+s+a+ 커서 위아래)
+     */
+
+     /**
+      * 1. javascript, jquery -> 페이지 자동 새로고침, 특정 div 영역 새로고침
+      *   https://saem-ee.tistory.com/20
+      *   https://remoted.tistory.com/56
+      * 
+      * 2. template page DB 생성, 동적 생성
+      * 
+      * 3. DB
+      *     mysql 칼럼 추가 시 datetime을 이용하여 현재 시간 입력하기
+      *   
+      *     alter table `testi_card` modify testi_regist_date datetime default current_timestamp;
+      * 
+      * 4. textarea로 입력받은 글을 공백과 줄바꿈을 살려서 출력하기
+      * https://offbyone.tistory.com/326
+      */

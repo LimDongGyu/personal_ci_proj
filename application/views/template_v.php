@@ -39,7 +39,7 @@
                     <li><a href="/login">로그인</a></li>
                     <li><a class="active" href="/main/board">게시판</a></li>
                     <li><a href="/template">탬플릿</a></li>
-                    <li><a href="#">샘플</a></li>
+                    <li><a href="/Crud">샘플</a></li>
                 </ul>
             </div>
             <div class="userinfo"></div>
@@ -59,159 +59,75 @@
                     <div class="main-info"><img src="https://icons-for-free.com/iconfiles/png/512/twitch-1320194643260954752.png" alt="">
                         <p>twitch.com/#limdg5335</p>
                     </div>
-                    <div class="main-info"><img src="https://lh3.googleusercontent.com/proxy/bXwWbcjeOfO8xpAWehgKyGelV2xGNXcVMluxY0N17-GFAKec_6ZKcdjzCwMO0UONMpORLRn9Mp3pQOI9Z8EnorJI4iB93Cr8gE20eGrGOA" alt="">
+                    <div class="main-info"><img src="https://icons-for-free.com/iconfiles/png/512/twitch-1320194643260954752.png" alt="">
                         <p>limdg5335@gmail.com</p>
                     </div>
                 </div>
             </div>
             <div class="section">
-                    <div class="testimonials">
-                        <div class="testi_card">
-                            <div class="layer"></div>
-                            <div class="content">
-                            <p>
-                                    텍스트 내용<br>
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                </p>
-                                <div class="testi_img">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="details">
-                                    <h2>Someone Famous<br><span>Someone Famous</span></h2>
-                                </div>
+                <div>
+                    <!-- <button type="button" class="btn btn-danger"  style="float:right; margin-top:5px; margin-right:10px;">삭제</button> -->
+                    <button type="button" class="btn btn-primary" style="float:right; margin-top:5px; margin-right:10px;" data-toggle="modal" data-target="#testi_card_add">추가</button>
+                </div>
+
+                <!-- Modal -->
+                <!-- add -->
+                <div class="modal fade" id="testi_card_add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel" style="color:#000000">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                        </div>
-                        <div class="testi_card">
-                            <div class="layer"></div>
-                            <div class="content">
-                            <p>
-                                    텍스트 내용<br>
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                </p>
-                                <div class="testi_img">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="details">
-                                    <h2>Someone Famous<br><span>Someone Famous</span></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testi_card">
-                            <div class="layer"></div>
-                            <div class="content">
-                            <p>
-                                    텍스트 내용<br>
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                </p>
-                                <div class="testi_img">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="details">
-                                    <h2>Someone Famous<br><span>Someone Famous</span></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testi_card">
-                            <div class="layer"></div>
-                            <div class="content">
-                            <p>
-                                텍스트 내용<br>
-                                텍스트 내용
-                                텍스트 내용
-                                텍스트 내용
-                                텍스트 내용
-                                텍스트 내용
-                                텍스트 내용
-                                텍스트 내용
-                                텍스트 내용
-                                텍스트 내용
-                                텍스트 내용
-                                </p>
-                                <div class="testi_img">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="details">
-                                    <h2>Someone Famous<br><span>Someone Famous</span></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testi_card">
-                            <div class="layer"></div>
-                            <div class="content">
-                            <p>
-                                    텍스트 내용<br>
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                </p>
-                                <div class="testi_img">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="details">
-                                    <h2>Someone Famous<br><span>Someone Famous</span></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testi_card">
-                            <div class="layer"></div>
-                            <div class="content">
-                                <p>
-                                    텍스트 내용<br>
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                    텍스트 내용
-                                </p>
-                                <div class="testi_img">
-                                    <img src="" alt="">
-                                </div>
-                                <div class="details">
-                                    <h2>Someone Famous<br><span>Someone Famous</span></h2>
-                                </div>
+                            <div class="modal-body" style="color:#000000">
+                                <form action="<?php echo site_url('template/create')?>" method="post">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">testi_title</label>
+                                        <input type="text" class="form-control" name="testi_title" aria-describedby="emailHelp" placeholder="Enter testi_title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">testi_description</label>
+                                        <input type="text" class="form-control" name="testi_description" aria-describedby="emailHelp" placeholder="Enter testi_title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">testi_img</label>
+                                        <input type="text" class="form-control" name="testi_img" aria-describedby="emailHelp" placeholder="Enter img link">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">testi_context</label>
+                                        <textarea class="form-control" name="testi_context" aria-describedby="emailHelp" rows="5" placeholder="Enter testi_context"></textarea>
+                                    </div>
+                                    <div class="form-group" style="text-align:center;">
+                                        <button type="submit" class="btn btn-primary" value="save">등록완료</button>
+                                        <a href="<?php echo site_url('Template')?>"><button type="button" class="btn btn-danger">취소</button></a>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="testimonials">
+                    <?php
+                        $strHtml='';
+                        foreach ($result as $row){
+                            $testi_context = $row->testi_context;
+                            $testi_title = $row->testi_title;
+                            $testi_description = $row->testi_description;
+                            $testi_id = $row->testi_id;
+                            $testi_img = $row->testi_img;
+
+                            $strHtml .= '<a href="/template/edit/'.$testi_id.'"><div class="testi_card"><div class="layer"></div>';
+                            $strHtml .= '<div class="content"><input type="hidden" name="testi_id" value="'.$testi_id.'">';
+                            $strHtml .= '<p>'.$testi_context.'</p>';
+                            $strHtml .= '<div class="testi_img"><img src="'.$testi_img.'" alt=""></div>';
+                            $strHtml .= '<div class="details"><h2>'.$testi_title.'<br><span>'.$testi_description.'</span></h2></div></div></div></a>';
+                        }
+                        echo $strHtml;
+                    ?>
+                </div>
+            </div>
             <div class="aside"></div>
             </div>
         <!-- <footer></footer> -->

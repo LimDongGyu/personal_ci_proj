@@ -25,7 +25,7 @@
                 <div class="main-info"><img src="https://icons-for-free.com/iconfiles/png/512/twitch-1320194643260954752.png" alt="">
                     <p>twitch.com/#limdg5335</p>
                 </div>
-                <div class="main-info"><img src="https://lh3.googleusercontent.com/proxy/bXwWbcjeOfO8xpAWehgKyGelV2xGNXcVMluxY0N17-GFAKec_6ZKcdjzCwMO0UONMpORLRn9Mp3pQOI9Z8EnorJI4iB93Cr8gE20eGrGOA" alt="">
+                <div class="main-info"><img src="https://icons-for-free.com/iconfiles/png/512/twitch-1320194643260954752.png" alt="">
                     <p>limdg5335@gmail.com</p>
                 </div>
             </div>
@@ -80,8 +80,6 @@
                 }
             ?>
 
-            
-
             <div class="line" style="width: 100%; position:absolute; bottom:0px; left:0px; height:200px;">
                 <form action="/process/comment_write" method="post">
                     <input type="hidden" name="post_id_join" value="<?php echo $id; ?>">
@@ -93,21 +91,23 @@
                 <br /><br />
             </div>
 
-            <div class="comment-lists">
+            <div class="comment-lists" id="comment-lists">
                 <?php
                 foreach ($comment as $list){
                     $nick = $list->uploader_nickname;
                     $id = $list->uploader_id;
                     $desc = $list->description;
                     $id_key = $list->id_key;
+                    $time = substr($list->time, 0, 10);
 
                     $strHtml = '';
-                    $strHtml ='<div class="comment"><span class="comment-uploader"><strong>'.$nick.' : </strong></span><span>'.$desc.'</span>';
+                    $strHtml ='<div class="comment" id="comment"><span class="comment-uploader"><strong>'.$nick.'</strong>('.$time.') : </span><span>'.$desc.'</span>';
 
                     if(isset($_SESSION['user_id'])) {
                         if ($id == $_SESSION['user_id']) {
                             $strHtml .='<span style="float:right;"><a href="" class="btn btn-primary btn-comment">수정</a>';
-                            $strHtml .= '<a href="/process/comment_delete/'.$id_key.'" class="btn btn-danger btn-comment">삭제</a></span>';
+                            // $strHtml .= '<a href="/process/comment_delete/'.$id_key.'" class="btn btn-danger btn-comment">삭제</a></span>';
+                            $strHtml .= '<button type="button" class="btn btn-danger btn-comment" value="테스트" onclick="remove('.$id_key.');">삭제</button></span>';
                         }
                     }
                     $strHtml .='</div>';
@@ -120,4 +120,15 @@
     </div>
     <!-- <footer></footer> -->
 </body>
+<script>
+    function remove(id_key){
+        $.ajax({
+            url: "/process/comment_delete/"+id_key,
+            type: "post",
+            data: id_key,
+        }).done(function(data){
+            $("#comment-lists").load(window.location.href+ '#comment-lists #comment');
+        });
+    }
+</script>
 </html>

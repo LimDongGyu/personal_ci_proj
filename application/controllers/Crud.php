@@ -36,9 +36,7 @@ class Crud extends CI_Controller {
 
     public function delete($id){
         $this->Crud_m->deleteData($id);
-        
         redirect('crud','refresh');
-        
     }
 
 }

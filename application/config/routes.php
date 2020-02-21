@@ -66,7 +66,9 @@ $route['post/(:num)']               = "main/post/$1";
 
 
 $route['android']                   = 'android/page';
-$route['template']                  = 'template/page';
+
+$route['template']                 = 'template';
+$route['template/create']          = 'template/create';
 
 //DB process
 $route['/process/login']            = 'process/login';
@@ -81,3 +83,6 @@ $route['/process/comment_delete/(:num)']   = 'process/comment_delete/$1';
 
 //crud
 $route['/crud']                     = 'crud';
+
+//calendar
+$route['/calendar']                 = 'calendar';

@@ -319,7 +319,7 @@ class Process extends CI_Controller {
             exit();
         }
 		
-		echo("<script>alert('글을 수정했습니다.')</script>");
+		// echo("<script>alert('글을 수정했습니다.')</script>");
         echo("<script>location.href='/post/$id';</script>");
 
 	}
@@ -341,7 +341,7 @@ class Process extends CI_Controller {
             exit();
         }
 		
-		echo("<script>alert('글을 삭제했습니다.')</script>");
+		// echo("<script>alert('글을 삭제했습니다.')</script>");
         echo("<script>location.href='/';</script>");
 	}
 
@@ -383,8 +383,9 @@ class Process extends CI_Controller {
 			echo("<script>history.back();</script>");
 			exit();
         }
-		echo("<script>alert('댓글을 작성했습니다.')</script>");
-        echo("<script>history.back();</script>");
+		// echo("<script>alert('댓글을 작성했습니다.')</script>");
+		// echo("<script>history.back();</script>");
+		echo("<script>location.href='/post/$post_id_join';</script>");
 	}
 
 	function comment_delete($id){
@@ -395,7 +396,7 @@ class Process extends CI_Controller {
 			echo("<script>history.back();</script>");
             exit();
 		}
-		echo("<script>alert('댓글을 삭제했습니다.')</script>");
-        echo("<script>history.back();</script>");
+		// echo("<script>alert('댓글을 삭제했습니다.')</script>");
+        // echo("<script>history.back();</script>");
 	}
 }

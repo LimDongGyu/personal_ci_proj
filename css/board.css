@@ -72,6 +72,7 @@ footer{width:100%; height:100px; background-color:#959595;}
 .testimonials .testi_card:hover .content .details h2 span{color: #fff;}
 .testimonials .testi_card .content .testi_img{width: 100px; height: 100px; margin: 0 auto; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.5);}
 .testi_img img{width: 100px; height: 100px;}
+.testimonials a{text-decoration: none;}
 
 .nav-side .main{width: 150px; height: 150px; margin: 0 auto; margin-top: 30px; margin-bottom:30px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.5);}
 .nav-side .main img{width: 150px; height: 150px;}
@@ -114,3 +115,6 @@ footer{width:100%; height:100px; background-color:#959595;}
 
 /* chrome scrollbar hidden*/
 ::-webkit-scrollbar { display: none !important;}
+
+/*template modal*/
+.form-group label{color:#000}

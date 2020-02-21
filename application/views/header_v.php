@@ -60,7 +60,7 @@
                     <li><a href="/login">로그인</a></li>
                     <li><a class="active" href="/main/board">게시판</a></li>
                     <li><a href="/template">탬플릿</a></li>
-                    <li><a href="#">샘플</a></li>
+                    <li><a href="/Crud">샘플</a></li>
                 </ul>
             </div>
             

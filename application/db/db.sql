@@ -35,3 +35,13 @@ CREATE TABLE `posts` (
   `description` text NOT NULL,
   PRIMARY KEY (`id_key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='ckeditor uploaded database table';
+
+CREATE TABLE `testi_card` (
+  `testi_id` int NOT NULL AUTO_INCREMENT,
+  `testi_context` text,
+  `testi_title` text,
+  `testi_description` text,
+  `testi_regist_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `testi_img` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`testi_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;

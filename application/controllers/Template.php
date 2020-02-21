@@ -21,6 +21,35 @@ class Template extends CI_Controller {
       // $this->Main_model->test();는 로드된 Main_model.php에서 test 함수를 실행하겠다는 뜻입니다.
     // $this->load->model('Main_model');
     // $this->Main_model->test();
+
+        $this->load->model('Template_m');
+        $config['total_rows'] = $this->Template_m->countAll();
+        $data['result'] = $this->Template_m->getAllData();
+		$this->load->view('template_v', $data);
+    }
+
+    public function create(){
+        $this->load->model('Template_m');
+        $this->Template_m->createData();
+        redirect('template','refresh');
+    }
+
+    public function update($id){
+        $this->load->model('Template_m');
+        $this->Template_m->updateData($id);
+        redirect('template','refresh');   
+    }
+
+    public function edit($id){
+        $this->load->model('Template_m');
+        $data['row'] = $this->Template_m->getData($id);
+        $this->load->view('template/templateEdit_v', $data);
+    }
+
+    public function delete($id){
+        $this->load->model('Template_m');
+        $this->Template_m->deleteData($id);
+        redirect('template','refresh');
     }
 
     public function page(){
