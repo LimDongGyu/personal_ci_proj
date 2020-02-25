@@ -220,21 +220,17 @@
      *? dokcer
       
         : 서비스 운영 환경을 묶어서 손쉽게 배포하고 실행하는 경량 컨테이너 기술
-
       [참고] https://www.slideshare.net/pyrasis/docker-fordummies-44424016
         - Dockerfile : 서버구성을 문서화한 것(클래스 정의가 들어있는 파일)
         - docker build : 도커 이미지 만들기(클래스 정의를 어플리케이션에 로드)
         - docker run [option] : 이미지에 붙이는 장식들(인스턴스 변수들)
         - docker run : 장식 붙은 이미지를 실제로 실행(인스턴스 생성)
-
         - 이미지와 컨테이너
           > 이미지는 서비스 운영에 필요한 서버프로그램, 소스코드, 컴파일된 실행파일을 묶은 형태
             : 저장소에 올리고 받는건 이미지(push/pull)
           > 컨테이너는 이미지를 실행한 상태
             : 이미지로 여러 개의 컨테이너를 만들 수 있음
             운영체제로 치면 이미지는 실행파일, 컨테이너는 프로세스
-
-
       [명령어]
       docker images > 모든 이미지 출력
       docker pull [이미지이름]:[태그] > pull 명령으로 이미지 받기
@@ -254,7 +250,6 @@
       docker-compose down
       docker-compose stop [서비스 이름]
       docker-compose rm [서비스 이름]
-
      * ? docker-compose 사용법
         [참고] https://pages.wiserain.com/articles/cheatsheet-docker-compose/
      */
@@ -804,4 +799,176 @@
       * 
       * 4. textarea로 입력받은 글을 공백과 줄바꿈을 살려서 출력하기
       * https://offbyone.tistory.com/326
+      * 
+      * 5. template page testi_card add, delete, update
       */
+
+      /**
+       *  dashboard 형태의 사이트를 구축
+       * 
+       *  개발환경
+       * https://kdinner.tistory.com/31
+       * 
+       * front-end : vue.js(nuxt.js)
+       * back-end  : express.js or laravel(v6.x) or Django or Rails
+       * 
+       * 
+       *  템플릿(header, section, nav-side, aside, footer)
+       *  회원가입
+       *  로그인/로그아웃
+       *    ㄴ 세션or토큰, 관리자 권한 체크
+       *  nav, header 등에 관리자/일반 사용자 별 노출
+       *  관리자     - 회원관리, 특정 게시판 CRUD
+       *             - 차후, 페이지 권한 관리
+       *             - 권한 관리 페이지(허용 페이지, 허용 권한)
+       *  일반사용자  - 게시판 열람, 댓글, 문의 게시판 CRUD
+       *            - 게시판 별 권한
+       *  DB - ORM(graphQL), Mysql
+       * 
+       * 
+       * 
+       * 토큰을 이용한 로그인 유지 flow [참고]https://kdinner.tistory.com/60
+       * 
+       * [참고] https://medium.com/hivelab-dev/vue-express-mysql-part1-98f68408d444
+       * 
+       * 
+       * 
+       * js this binding [참고]https://medium.com/sjk5766/javascript-this-binding-%EC%A0%95%EB%A6%AC-ae84e2499962
+       */
+
+
+       /**
+        * ! 2020-02-24
+        * 
+        * 1. FRONTEND 실습
+        *   https://github.com/jeonghwan-kim/lecture-frontend-dev-env
+        * 
+        * 2. webpack
+        * 3. babel 웹팩으로 통합하기
+        * 
+        * 
+        * * 웹팩 핸드북
+        *   [참고] https://joshua1988.github.io/webpack-guide/concepts/loader.html
+        * 
+        * * 차후 CommonJs, AMD, IIFE 정리
+        */
+
+        /**
+         * ! 2020-02-25
+         * 
+         * ? Eloquent 정리 
+         * ? babel 정리
+         *     ㄴ 개념, 명령어
+         * ?. Laravel 디렉토리 정리
+         * 
+         * 
+         * ? 라라벨 + 뷰) https://www.youtube.com/watch?v=8nNZCDbYUJQ
+         * 
+         * 
+         * 
+         * 1. Eloquent
+         * 
+         * 배경 : 유연한 데이터베이스를 지원하기 위해서 데이터베이스 추상화 필요성
+         * 
+         * 라라벨 : 
+         *        라라벨은 DB 레이어를 추상화한 레이어인 PDO(PHP Data Object)를 사용하므로
+         *        mysql_fetch_array, oci_fetch_array처럼 특정 벤더에 의존적이지 않은 함수를 사용하지 않고 DB 관련 코드 작성 가능
+         *        또한 의존성 주입을 사용해 런타임에 사용할 DB를 결정하므로 사용하는 DB 종류를 변경 가능 
+         *
+         *  라라벨은 QueryBuilder와 ORM(Object Relation Mapping)을 지원함
+         *   ㄴ 쿼리빌더 : SQL을 사용하지 않고 손쉽게 DB와 작업 가능
+         * 
+         * Eloquent는 라라벨에서 제공하는 ORM의 종류이며 MVC패턴에서 Model 담당
+         *    
+         * Eloquent 사용법 및 팁
+         * [참고] https://laravel-news.com/eloquent-tips-tricks
+         * 
+         * 
+         * [참고] https://laravel.kr/docs/6.x/eloquent
+         * [참고] https://www.lesstif.com/display/laravelprog/Eloquent+ORM
+         * [참고] https://www.lesstif.com/pages/viewpage.action?pageId=24445831
+         * 
+         * 
+         * 2. babel
+         * 
+         * : 실행환경(브라우저 버전 등)에 구애받지 않고 항상 최신 문법의 js로 코딩할 수 있도록 도와주는 도구
+         * 
+         * 배경: js 문법은 빠르게 변화하나 이 js를 실행시켜주는 환경이 이 속도를 따라오지 못하는 경우가 많음
+         * 브라우저의 종류나 버전이 매우 다양하고, 어떤 js 문법까지 지원을 해주는지 상이함
+         * 따라서, js로 코딩 시 최신 문법을 쓰기에 일부 실행환경에서 작동하지 않는 이슈가 발생할 수 있어서 낮은 버전으로 개발할 수 밖에 없음
+         * 
+         * 바벨은 자바스크립트 트랜스파일러로, 다른 실행환경에서도 돌아갈 수 있도록 js 언어와 버전을 유지한 채 소스코드의 형태만 바꿈
+         * 바벨을 이용하면 ES6 이상의 최신문법으로 작성한 코드를 그 이하의 예전 문법으로 작성한 것 처럼 소스코드 내의 문법의 형태만 바꿈
+         * 따라서, 최신 문법을 지원하는 실행환경과 지원하지 않는 환경 모두에서 문제가 없음
+         * 
+         * 
+         * polyfill
+         *   : 런타임에 기능을 주입하는 것, 런타임에 기능이 존재하는지 없는지를 검사해서 없으면 넣어주고 있으면 넣지 않음
+         *    바벨 설정만 한다고 해결되는 것이 아님. 바벨은 트랜스파일만 시켜줌. 바벨 그 자체로는 새로운 ES6의 객체(Promise, Map, Set등)와
+         *    메소드(Array.find 등)을 사용할 수 없음. ES6에서 처음 생긴거라 구형 js에는 이에 상응하는 코드가 없기 때문임. 그래서
+         *    polyfill를 설정해줘야 주입됨
+         * 
+         *    babel 6버전 이하 : npm install babel-polyfill
+         *          7버전      : npm install @babel-polyfill
+         * 
+         * 단점] polyfill 적용 시 해당 모듈의 모든 polyfill을 가져와 번들의 용량이 커짐
+         *      따라서, @bable/polyfill 패키지가 아니라 core-js에서 직접 필요한 부분의 polyfill만 가져와 번들의 크기를 줄일 필요 있음
+         *      단, 번들 크기에 민감하지 않는 프로젝트라면 상관 없음
+         * 
+         * 팁] @babel/preset-env는 적당한 번들크기를 유지시키면서 폴리필 추가를 깜빡하는 실수를 막고 싶을 때 사용하면 유용하다.
+         * 
+         * [참고] https://avengersrhydon1121.tistory.com/225
+         * [참고] https://www.zerocho.com/category/ECMAScript/post/57a830cfa1d6971500059d5a
+         * 
+         * 
+         * 
+         * preset
+         * polyfill
+         * axios
+         * 
+         * 
+         * 
+         * 스캐폴딩
+         * 프로비저닝 뜻
+         * 젠킨스 재배포
+         * APOLLO
+         * SOLID
+         */
+
+
+         /**
+          * musemanager
+          * 
+          * ? https://gitlab.com/musemanager/musemanager1
+          * ? https://gitlab.com/pen9uin/docker-server
+          * 
+          * 
+          * 1. docker-server를 git으로 가져옴
+          *   1.1. git branch 확인 후 git checkout TLS
+          *   1.2. /root/common-fpm.yml, common-was.yml environment 변수 주석
+          *   1.3. /root/nginx/conf/was/conf.d/9.conf
+          *      server_name _; 로 변경
+          *      root /code/9;   로 변경
+          *   1.4. /root/nginx/conf/proxy/conf.d/default.conf
+          *      default.conf 파일 확장자 변경 -> 없어도 되는 파일
+          *   1.5. /root/nginx/conf/proxy/conf.d/mm9.conf
+          *      server_name _; 로 변경
+          * 
+          * 2. musemanager를 git으로 가져와 /root/code/9 디렉토리에 넣는다.
+          *   2.1. /code/9/config/mail, constants,db_conn, expose_constants.php 생성 
+          * //composer이 없어서 안되는 것이었음. vendor가 없어요.
+          * 3. docker-compose.exe up -d
+          * 4. docker ps
+          * 5. php-fpm서버의 id로 container 접속
+          *    docker exec -it <id> bash
+          * 6. cd app/9
+          * 7. composer install
+          * 8. /root/code/9/index.php
+          *     93줄 : 추가 : $deny_user=1; 테스트 후 삭제
+          * 9. docker-compose.exe up -d
+          * 
+          * 
+          * 
+          * 문자전송 테스트 : 010-0000-0000
+          * 
+          */
