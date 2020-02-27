@@ -86,3 +86,7 @@ $route['/crud']                     = 'crud';
 
 //calendar
 $route['/calendar']                 = 'calendar';
+
+//test
+$route['/test']                     = 'test';
+$route['/test/postTest']            = 'test/postTest';

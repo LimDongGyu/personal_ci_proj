@@ -1020,4 +1020,23 @@
              * 2. [PHP] post JSON 받는 방법
              *   
              *    json_decode(file_get_contents('php://input'), true);
+             * 
+             * 3. [PHP] 상수 선언
+             *      define('TITLE', 'JAVA Tutorial');
+             * 
+             * 4. [PHP] 변수에 담긴 데이터 형을 검사하고 변경하기
+             * 
+             *    gettype(변수);
+             *    settype(변수, 데이터);
+             * 
+             *   4.1. is_array, is_bool, is_callable, is_double, is_int, ... 
+             * 
+             * 5. 가변변수
+             *   : variable variables : 변수의 이름을 변수로 변경하기
+             *   $title = '내용';
+             *   $$title = '내용바꾸기';
+             * 
+             * 6. PHP Carbon (시간함수 라이브러리)
+             *   ㄴ composer require nesbot/carbon
+             * 
              */
