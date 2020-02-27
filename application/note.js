@@ -966,9 +966,58 @@
           * 8. /root/code/9/index.php
           *     93줄 : 추가 : $deny_user=1; 테스트 후 삭제
           * 9. docker-compose.exe up -d
+          * 10. constants.php
+          *    내용 수정 : define("EC2ELASTICIP", "doc_musemanager1_mqtt_1");
+
+          *    
           * 
-          * 
+          * php 글로벌 변수처럼 보이는 것들은 상수고 컨트롤러단에서 넘겨주는거임
           * 
           * 문자전송 테스트 : 010-0000-0000
           * 
           */
+
+          /**
+           * ! 2020-02-26
+           * 
+           * ? 1. musemaster 화면 수정
+           *     ㄴ 고객관리 > 예약 > 상담차트의 고객희망시술내용 추가(상담사 권한)
+           *     관리자 : test111 / xptmxm1234
+           *     상담사 : test222 / xptmxm1234
+           * ? 2. kakaomaster chatbot
+           *     ㄴ 1.skillRequest 파싱
+           *     ㄴ 2.skillResponse 포맷 작성
+           * 
+           * 
+           * docker 명령: 
+           * docker inspect <컨테이너id>
+           * 
+           * 
+           * php로 json post 받기 https://cnpnote.tistory.com/entry/PHP%EB%A1%9C-JSON-POST-%EB%B0%9B%EA%B8%B0
+           * php 카카오 챗봇 샘플 https://chrislee.kr/wp/2019/03/29/%EA%B0%84%EB%8B%A8%ED%95%9C-%EC%B9%B4%EC%B9%B4%EC%98%A4-i-%EC%98%A4%ED%94%88%EB%B9%8C%EB%8D%94-%EC%B1%97%EB%B4%87-%EB%A7%8C%EB%93%A4%EA%B8%B0-kakao-i-open-builder-php-mysql/
+           */
+
+
+           /**
+            * ! 2020-02-26
+            * 
+            * ? 1. musemanager 화면 수정
+            * // ㄴ 지정시간 저장 시, user_id, name 저장 안됨
+            * //   ㄴ reserve_time_limit table
+            * //   ㄴ reserve_controller.php -> updateReserveInfo_lowAuth -> 체크
+            * // ㄴ web/support.php 지정시간 select 값 못가져옴
+            * 
+            * git 올리기 전에 index.php 등 제외해야 하는 파일 선정
+            */
+
+            /**
+             * 1. [PHP] 배열 요소 유무 확인
+             *   [참고] https://extbrain.tistory.com/14
+             * 
+             *   in_array(arr, 자료형 확인여부(true, false));
+             *     ㄴ 자료형 확인여부 true -> 배열 안의 자료형 확인
+             *
+             * 2. [PHP] post JSON 받는 방법
+             *   
+             *    json_decode(file_get_contents('php://input'), true);
+             */
