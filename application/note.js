@@ -1107,3 +1107,142 @@ docker-compose rm [서비스 이름]
  * 
  *    
  */
+
+
+ /**
+  * ! 2020-03-02
+  * 
+  * ? Dockerfile 이용한 이미지 생성
+  * ? Musemanager Source Review
+  * 
+  * 
+  * 
+  * * Dockerfile 명령어
+  * 
+  * From          --> 새로 생성할 이미지의 BASE가 될 이미지를 지정
+  * Entrypoint    --> 컨테이너를 시작할 때 실행할 명령어 지정
+  *   ㄴ exec  형식  --> Entrypoint <명령어> <인자1> <인자2> ...
+  *   ㄴ shell 형식
+  * WorkDir       --> 작업 디렉토리 지정 (명령어를 실행할 디렉토리 지정)
+  * Env           --> 환경변수 지정, Dockerfile 뿐 아니라, 이미지에도 저장되므로 빌드된 이미지로 컨테이너를 생성했을 때, 내부에서 사용할 수 있음
+  * Run           --> 컨테이너를 생성할 때 실행할 코드 지정(컨테이너 내부에서 명령어 실행)              -- 예) 패키지 설치, 파일권한 변경 등
+  *                     [참고] run명령(옵션)  https://swiftymind.tistory.com/82?category=713317
+  * Create        --> 이미지를 통해 컨테이너 생성(생성만 가능, 접근하려면 start or attach 명령 추가 실행 필요)
+  * CMD           --> 컨테이너가 시작할 때마다 실행할 명령어 지정 (dockerfile에서 한 번만 사용 가능)
+  * Label         --> metadata => "key"="value"로 구성됨, inspect 명령 시 확인할 수 있는 내용
+  * Copy          --> 파일, 폴더를 이미지에 복사 (상대 경로 사용 시, WorkDir 경로를 기준으로 복사됨)
+  * Add           --> 파일, 폴더를 이미지에 추가(URL, .tar 파일 추가 가능)
+  * Expose        --> dockerfile build로 생성된 이미지에서 노출할 포트 지정
+  * --------------------------------------------------------------------------------------------------------------------------------------
+  * User          --> 컨테이너 내에서 사용될 사용자 계정, Uid 설정
+  * Maintainer    --> 이미지를 만든 개발자 정보 작성
+  * Onbuild       --> 빌드된 이미지를 기반으로 하는 다른 이미지가 dockerfile로 생성될 때, 실행할 명령어 지정
+  * Shell         --> 기본 shell 변경
+  * Healthcheck   --> 이미지로부터 생성된 컨테이너에서 동작하는 애플리케이션의 상태를 체크하도록 설정
+  * Arg           --> build 명령어 실행 시 추가로 입력받아 dockerfile에서 사용될 변수의 값 지정
+  * Stopsignal    --> 컨테이너가 정지될 때 사용될 시스템 콜 종류 지정(default : SIGTERM)
+  * 
+  * 
+  * [참고] https://swiftymind.tistory.com/91
+  * [참고] https://javacan.tistory.com/entry/docker-start-7-create-image-using-dockerfile
+  * [참고] https://www.44bits.io/ko/post/how-docker-image-work
+  * [참고] https://javacan.tistory.com/entry/docker-start-2-running-container
+  *
+  * 
+  * 
+  * * Docker build
+  *   : 이미지 생성  --> docker build --tag[-t] <이미지명:태그> <도커파일 경로>
+  *                        ㄴ [예시] docker build -t imageSample:1.0 .     --> 현재 경로일 때,
+  * 
+  * docker build 시, 이전에 했던 이미지가 남아있는 채로 다시 빌드하면 이전에 사용했던 캐시를 사용하게 됨
+  *   docker build --no-cache    --> 캐시를 사용하지 않고 빌드
+  *   docker build --cache-from  --> 특정 이미지로 빌드
+  * 
+  *  [참고] https://swiftymind.tistory.com/93?category=713317
+  * 
+  * 
+  * * Docker Volume
+  *  [배경] docker 이미지로 컨테이너 생성 시, 이미지는 읽기 전용이 되고, 컨테이너의 변경 사항만 별도로 각 컨테이너의 정보로 보존함
+  *        그런데 컨테이너가 삭제가 되면 그동안 저장된 운용데이터들이 함께 삭제가 됨. 복구도 불가능해지기 때문에, 이 컨테이너의 데이터를
+  *        영속적 데이터로 활용할 수 있도록 하는 방법의 필요성이 제기
+  * 
+  *  [사용목적] container의 데이터 휘발성, container끼리 데이터 공유
+  * 
+  * 
+  *  [방법1] 호스트 볼륨 공유
+  *    ㄴ 내 컴퓨터(호스트)와 저장장소를 공유하는 방법
+  * 
+  *    --> [예시]
+  *    --> -v 옵션으로 호스트 디렉토리와 컨테이너 디렉토리를 설정
+  *    $ docker run -d \                                  # -d : 컨테이너를 백그라운드에서 동작하는 어플리케이션으로 실행하도록 합니다.
+  *      > --name wordpressdb_hostvolume \                  # --name : 컨테이너 이름은 wordpressdb_hostvolume 
+  *      > -e MYSQL_DATABASE=wordpress \                    # -e : 환경변수 설정, MySQL Database는 wordpress
+  *      > -e MYSQL_ROOT_PASSWORD=password \                # -e : 환경변수 설정, MySQL 비밀번호는 password 
+  *      > -v /Users/jungwoon/wordpress_db:/var/lib/mysql \ # -v : 공유할 디렉토리 설정, -v [호스트 디렉토리]:[컨테이너 디렉토리]
+  *      > mysql:5.7                                        # 이미지는 mysql:5.7
+  * 
+  * 
+  *  [방법2] 볼륨 컨테이너
+  *    ㄴ -v옵션으로 볼륨을 사용하는 컨테이너를 다른 컨테이너와 공유하는 법
+  *    ㄴ 컨테이너 생성 시 '--volumes-from' 옵션을 사용하면 -v옵션이 적용된 컨테이너의 볼륨 디렉토리를 공유할 수 있음
+  * 
+  * 
+  *  [방법3] 도커 볼륨
+  *    ㄴ 'docker volume' 명령어를 통해 도커 자체에서 제공하는 볼륨 기능을 활용해 데이터 보존 
+  * 
+  * 
+  * [참고] https://jungwoon.github.io/docker/2019/01/13/Docker-3/
+  * [참고] 도커 볼륨 사용법 https://0902.tistory.com/6
+  * 
+  * 
+  * 
+  * 
+  * * 로컬 스토리지와 컨테이너를 연결 할 때는 run의 --mount 옵션을 사용
+  * [참고] https://javacan.tistory.com/entry/docker-start-3-port-env-local-storage
+  * [참고] https://javacan.tistory.com/entry/docker-start-4-storage-volume
+  *  
+  * 
+  * ---명령어
+  * docker volume ls             --> 볼륨 확인
+  * docker inspect <이미지명>     --> 이미지 내 label 출력
+  * 
+  * 
+  * [도커 명령어] https://0902.tistory.com/4?category=675093  
+  * 
+  * 
+  * 
+  * 
+  * * Docker Compose
+  *    ㄴ yaml 파일에 멀티 컨테이너 도커 어플리케이션의 서비스를 설정하여 사용할 수 있으며, 
+  *       설정된 yaml 파일을 이용하면 단순한 명령어로 애플리케이션의 실행에 필요한 모든 환경 구성을 완료 가능
+  * 
+  * [배경] 단순히 docker만 이용하여 개발환경 구축 시, 각각의 포트와 이미지와 연결, 다른 요소들을 추가할 때 시간이 꽤 걸림
+  *       멀티 컨테이너 도커 어플리케이션을 정의하고 실행하는 툴의 필요성 제기
+  * 
+  * [유스 케이스]
+  *   - 개발환경
+  *   - 자동화된 테스트 환경
+  *   - 싱글 호스트 배포
+  *   - 도커 스웜 사용
+  * 
+  * 
+  * 1. 기능
+  *   - 하나의 시스템에서 여러 개의 독립적인 환경을 제공
+  *   - 변수와 각 환경 간의 요소 공유
+  *   - 변경된 컨테이너만 재생성할 수 있도록 함
+  *   - 컨테이너들이 생성될 때 데이터를 보존할 수 있게 함
+  * 
+  * 2. docker compose
+  *   2.1. 설치 
+  *     [참고] https://gitlab.com/pen9uin/docker-server
+  *  
+  *   2.2.compose 버전, 문법 구조
+  *     [참고] https://docs.docker.com/compose/compose-file/
+  * 
+  *     ㄴ 나중에 따로 작성할 것
+  * 
+  *   2.3. docker compose에서 컨테이너 startup 순서 컨트롤
+  *     [참고] https://jupiny.com/2016/11/13/conrtrol-container-startup-order-in-compose/
+  *   
+  * 
+  */
