@@ -17,6 +17,24 @@
     
     //변수 형태 보기
     print_r($json_post_data);
+
+
+    $simpleText = (Object)array(
+        "version"=> "2.0",
+        "template"=> (Object)array(
+            "output"=>array(
+                (Object)array(
+                    "simpleText"=>(Object)array(
+                        "text" => "심플텍스트"
+                )
+                )
+            )
+        )
+    );
+
+    $response = json_encode($simpleText);
+    print_r($response);
+
     
     //꺼내는 방식
     // echo $json_post_data->title."<br />";
