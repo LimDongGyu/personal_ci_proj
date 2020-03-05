@@ -93,4 +93,5 @@ $route['/test/postTest']            = 'test/postTest';
 
 
 //chatbot
-$route['/chatbot']                  = 'chatbot';
+$route['/chatbot']                      = 'chatbot';
+$route['/chatbot/custInfoCollection']   = 'chatbot/custInfoCollection';

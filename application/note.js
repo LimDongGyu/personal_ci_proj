@@ -1246,3 +1246,30 @@ docker-compose rm [서비스 이름]
   *   
   * 
   */
+
+
+  /**
+   * 
+   * ! 2020-03-05
+   * 
+   * ? 1. 챗봇 개발
+   *    - 서버정보 받음
+   *    - sftp 설정하는 법
+   * 
+   * 
+   * * sftp 설정
+   *     [참고] https://recoveryman.tistory.com/242
+   * 
+   * 1. atom install
+   * 2. pakages install
+   *    ㄴ 작업디렉토리 열기
+   *    ㄴ shift+ctrl+p -> 'remote ftp: Toggle' -> 
+   *    ㄴ [pakages] -> Remote ftp -> create SFTP config file
+   *    ㄴ .ftpconfig
+   *        host, user, remote, privateKey 수정
+   *              "host": "15.164.189.152",
+   *              "user": "ubuntu",
+   *              "remote": "/home/ubuntu/docker/source/muse",
+   *              "privatekey": "C:/Users/mement/Desktop/mement-app.ppk",  --> ppk 파일 경로
+   *    ㄴ Remote 탭에서 connection 클릭
+   */
