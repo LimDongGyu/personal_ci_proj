@@ -6,7 +6,7 @@ class Chatbot extends CI_Controller {
 	function __construct() {       
         parent::__construct();
         $this->load->library('basicCard');
-
+        $this->load->library('skillResponse');
     }
 
 
@@ -247,79 +247,52 @@ class Chatbot extends CI_Controller {
     }
 
 
-    //클래스 -> 차후 작업할 것
-    public function tray(){
-        $basicCardTray = (Object)array(
-            "title"=>"",
-            "description"=>"",
-            // "thumbnail"=>(Object)array(
-            //     "imageUrl"=>""
-            // ),
-            "buttons"=>array(
-                // (Object)array(
-                //     "action"=>"block",
-                //     "label"=>"categorys 내용 들어갈 것",
-                //     "blockId"=>"5e608fe803ec21000146e018",
-                //     "extra"=>(Object)array(
-                //         "categories_id_1"=>""
-                //     )
-                // )
-            )
-        );
+    public function basicCardTest(){
+        $raw_post_data = file_get_contents('php://input');
+        $verifyPayload = json_decode($raw_post_data);
 
-        $buttonTray = (Object)array(
-            "action"=>"block",
-            "label"=>"다음과 같은 시술을 선택하실 수 있습니다.\n\n",
-            "blockId"=>"5e608fe803ec21000146e018",      //중분류 선택하는 블록으로 연결할 것
-            // "extra"=>(Object)array(
-            //     "categories_id_1"=>""
-            // )
-        );
+        $basicTray = new BasicCard();
+        $basicTray->title = "test";
 
+        $basicTray->addThumbnail("https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722943__340.jpg");
+        //action, label, blockId
+        $basicTray->addButton("테스트내용", "block","5e608fe803ec21000146e018");
+        $basicTray->addButton("테스트내용", "block","5e608fe803ec21000146e018");
+
+        $basicTray->addExtra(0, "key", "value");
+        $basicTray->addExtra(0, "key2", "value2");
+        $basicTray->addExtra(0, "key3", "value3");
+
+        echo json_encode($basicTray, JSON_UNESCAPED_UNICODE);
     }
 
-    //스킬 답변 포맷
-    public function sample(){
-        $simpleText = (Object)array(
-            "version"=> "2.0",
-            "template"=> (Object)array(
-                "outputs"=>array(
-                    (Object)array(
-                        "simpleText"=>(Object)array(
-                            "text" => ""
-                    )
-                    )
-                )
-            )
-        );
+    //테스트용
+    public function test(){
+        $raw_post_data = file_get_contents('php://input');
+        $verifyPayload = json_decode($raw_post_data);
 
-        $basicCard = (Object)array(
-            "version"=>"2.0",
-            "template"=>(Object)array(
-                "outputs"=>array(
-                    (Object)array(
-                        "basicCard"=>(Object)array(
-                            "title"=>"",
-                            "description"=>"",
-                            "thumbnail"=>(Object)array(
-                                // "imageUrl"=>""
-                            ),
-                            "buttons"=>array(
-                                (Object)array(
-                                    "label"=>"",
-                                    "action"=>"",
-                                    // "blockId"=>"",
-                                ),
-                                (Object)array(
-                                    "label"=>"",
-                                    "action"=>"",
-                                    // "blockId"=>"",
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-        );
+
+        $basicTray = new BasicCard();
+        $basicTray->title = "test";
+
+        $basicTray->addThumbnail("https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722943__340.jpg");
+        //action, label, blockId
+        $basicTray->addButton("테스트내용", "block","5e608fe803ec21000146e018");
+        $basicTray->addButton("테스트내용", "block","5e608fe803ec21000146e018");
+
+        // $basicTray->addExtra(0, "key", "value");
+        // $basicTray->addExtra(0, "key2", "value2");
+        // $basicTray->addExtra(0, "key3", "value3");
+
+
+        $skillPayload = new SkillResponse();
+        array_push($skillPayload->template->outputs, array("basicCard"=>$basicTray));
+
+        $skillPayload->addQuickReplies("block", "버튼명1", "5e608fe803ec21000146e018");
+        // $skillPayload->addQuickReplies("block", "버튼명2");
+        // $skillPayload->addQuickExtra(0, "key", "value");
+        // $skillPayload->addQuickExtra(0, "key2", "value2");
+        
+        echo json_encode($skillPayload, JSON_UNESCAPED_UNICODE);
     }
 }
