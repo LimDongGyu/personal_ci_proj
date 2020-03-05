@@ -5,6 +5,8 @@ class Chatbot extends CI_Controller {
 
 	function __construct() {       
         parent::__construct();
+        $this->load->library('basicCard');
+
     }
 
 
@@ -64,9 +66,9 @@ class Chatbot extends CI_Controller {
                         "basicCard"=>(Object)array(
                             "title"=>"베이직카드 타이틀",
                             "description"=>$description,
-                            // "thumbnail"=>(Object)array(
-                            //     "imageUrl"=>""
-                            // )
+                            "thumbnail"=>(Object)array(
+                                "imageUrl"=>"https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722943__340.jpg"
+                            ),
                             "buttons"=>array(
                                 (Object)array(
                                     "label"=>"확인",
@@ -243,7 +245,6 @@ class Chatbot extends CI_Controller {
         array_push($res->template->outputs, $carouselTray);
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
     }
-
 
 
     //클래스 -> 차후 작업할 것
