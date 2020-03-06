@@ -95,3 +95,5 @@ CREATE TABLE testdb.chatbot_custominfo (
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8
 COLLATE=utf8_general_ci;
+
+

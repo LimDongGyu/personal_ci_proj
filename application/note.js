@@ -1273,3 +1273,13 @@ docker-compose rm [서비스 이름]
    *              "privatekey": "C:/Users/mement/Desktop/mement-app.ppk",  --> ppk 파일 경로
    *    ㄴ Remote 탭에서 connection 클릭
    */
+
+
+   /**
+    * 
+    * ! 2020-03-06
+    * 
+    * ? 1. 챗봇개발
+    *     1.1. 버튼 extra 값 저장 방법
+    *     1.2. 봇응답 클래스 생성 - 캐로셀, 기타
+    */
