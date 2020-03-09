@@ -5,9 +5,32 @@ class Chatbot extends CI_Controller {
 
 	function __construct() {       
         parent::__construct();
+        $this->load->library('carousel');
         $this->load->library('basicCard');
+        $this->load->library('commerseCard');
         $this->load->library('skillResponse');
     }
+
+
+    public function curlPost($url, $data=""){
+        $ch = curl_init(); 
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'User-Agent: Mozilla/5.0',
+        ));
+
+        if(!($data == "" || $data == null)){
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);   
+        }
+
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        return $output;
+    }
+
 
     //챗봇 로그저장
 	public function index() {
@@ -41,39 +64,40 @@ class Chatbot extends CI_Controller {
         $raw_post_data = file_get_contents('php://input');
         $skillPayload = json_decode($raw_post_data);
 
-        $ch = curl_init();      
         $url = 'http://15.164.189.152/chatbotApi/cb_customer_confirm';
         $data['phone'] = $skillPayload->action->params->custom_phone;
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'User-Agent: Mozilla/5.0',
-        ));
-
-        $output = curl_exec($ch);
-        curl_close($ch);
-
+        $output = $this->curlPost($url, $data);
         $confirm = json_decode($output);
         $cnt = count($confirm->customer);
 
         $skillResponse = new SkillResponse();
 
+        $user_data = array(
+            'custom_name'=>$skillPayload->action->params->custom_name,
+            'custom_phone'=>$skillPayload->action->params->custom_phone,
+            'custom_car'=>$skillPayload->action->params->custom_car,
+            'custom_memo'=>$skillPayload->action->params->custom_memo,
+        );
+
+        $description  = "입력하신 정보가 맞습니까?";
+        $description .= "\n\n▶ 이름: ".$user_data['custom_name'];
+        $description .= "\n▶ 전화번호: ".$user_data['custom_phone'];
+        $description .= "\n▶ 차량주차 대수: ".$user_data['custom_car'];
+        $description .= "\n▶ 메모: ".$user_data['custom_memo'];
+
         if($cnt == 1){
-            $user_data = array(
-                'custom_name'=>$skillPayload->action->params->custom_name,
-                'custom_phone'=>$skillPayload->action->params->custom_phone,
-                'custom_car'=>$skillPayload->action->params->custom_car,
-                'custom_memo'=>$skillPayload->action->params->custom_memo,
-            );
+            // $user_data = array(
+            //     'custom_name'=>$skillPayload->action->params->custom_name,
+            //     'custom_phone'=>$skillPayload->action->params->custom_phone,
+            //     'custom_car'=>$skillPayload->action->params->custom_car,
+            //     'custom_memo'=>$skillPayload->action->params->custom_memo,
+            // );
     
-            $description  = "입력하신 정보가 맞습니까?";
-            $description .= "\n\n▶ 이름: ".$user_data['custom_name'];
-            $description .= "\n▶ 전화번호: ".$user_data['custom_phone'];
-            $description .= "\n▶ 차량주차 대수: ".$user_data['custom_car'];
-            $description .= "\n▶ 메모: ".$user_data['custom_memo'];
+            // $description  = "입력하신 정보가 맞습니까?";
+            // $description .= "\n\n▶ 이름: ".$user_data['custom_name'];
+            // $description .= "\n▶ 전화번호: ".$user_data['custom_phone'];
+            // $description .= "\n▶ 차량주차 대수: ".$user_data['custom_car'];
+            // $description .= "\n▶ 메모: ".$user_data['custom_memo'];
     
             //db 저장
             if(!empty($user_data['custom_name']) || !empty($user_data['custom_phone']) || !empty($user_data['custom_memo']) || !($user_data['custom_car'] == null || "")){
@@ -93,6 +117,11 @@ class Chatbot extends CI_Controller {
             array_push($skillResponse->template->outputs, array("basicCard"=>$basicCard_1));
         }
         else if($cnt > 0){
+            $basicCard_1 = new BasicCard();
+            $basicCard_1->setContent("예약을 진행하기 위해선 고객정보가 필요합니다.", $description);
+            $basicCard_1->addThumbnail("https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722943__340.jpg", "altText", true, 100, 100, "http://gangnam.museclinic.co.kr/index.php/reser");        
+            array_push($skillResponse->template->outputs, array("basicCard"=>$basicCard_1));
+
             $carouselTray = (Object)array(
                 "carousel"=>(Object)array(
                     "type"=>"basicCard",
@@ -168,25 +197,13 @@ class Chatbot extends CI_Controller {
 
 
     public function getMainCategory(){
-        $ch = curl_init();      
         $url = 'http://15.164.189.152/chatbotApi/cb_main_reser';
-    
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'User-Agent: Mozilla/5.0',
-        ));
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-
-
-        $output = curl_exec($ch);
-        curl_close($ch);
-
-        $skillResponse = new SkillResponse();
+        $output = $this->curlPost($url);
 
         $categories = json_decode($output);
         $cnt = count($categories->categorys);
+
+        $skillResponse = new SkillResponse();
 
         $carouselTray = (Object)array(
             "carousel"=>(Object)array(
@@ -230,22 +247,9 @@ class Chatbot extends CI_Controller {
         $raw_post_data = file_get_contents('php://input');
         $skillPayload = json_decode($raw_post_data);
 
-        $ch = curl_init();      
         $url = 'http://15.164.189.152/chatbotApi/cb_main_reser_middles';
-
         $data['categoryId'] = $skillPayload->action->clientExtra->categoryId;
-    
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'User-Agent: Mozilla/5.0',
-        ));
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-
-        $output = curl_exec($ch);
-        curl_close($ch);
-
+        $output = $this->curlPost($url, $data);
         $middles = json_decode($output);
         $cnt = count($middles->middles);
 
@@ -305,23 +309,11 @@ class Chatbot extends CI_Controller {
         $raw_post_data = file_get_contents('php://input');
         $skillPayload = json_decode($raw_post_data);
 
-        $ch = curl_init();      
         $url = 'http://15.164.189.152/chatbotApi/cb_main_reser_detail';
         $data['middleId'] = $skillPayload->action->clientExtra->middleId;
-    
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'User-Agent: Mozilla/5.0',
-        ));
-
-        $output = curl_exec($ch);
-        curl_close($ch);
-
+        $output = $this->curlPost($url, $data);
         $details = json_decode($output);
-        
+
         $eventCnt = count($details->middles->events);
         $defaultCnt = count($details->middles->defaults);
 
@@ -413,19 +405,8 @@ class Chatbot extends CI_Controller {
 
     //예약하기 - 이벤트 리스트
     public function eventMainCategories(){
-        $ch = curl_init();      
         $url = 'http://15.164.189.152/chatbotApi/cb_event_main';
-    
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'User-Agent: Mozilla/5.0',
-        ));
-
-        $output = curl_exec($ch);
-        curl_close($ch);
-
+        $output = $this->curlPost($url);
         $events = json_decode($output);
 
         $skillResponse = new SkillResponse();
@@ -480,28 +461,12 @@ class Chatbot extends CI_Controller {
         
         $data['groupId'] = $skillPayload->action->clientExtra->groupId;
         $data['chainId'] = $skillPayload->action->clientExtra->chainId;
-
-        $ch = curl_init();      
         $url = 'http://15.164.189.152/chatbotApi/cb_event_groups';
-    
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        // curl_setopt($ch, CURLOPT_POSTFIELDSIZE, 0);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'User-Agent: Mozilla/5.0',
-        ));
-
-        $output = curl_exec($ch);
-        curl_close($ch);
-
+        $output = $this->curlPost($url, $data);
         $items = json_decode($output);
         $cnt = count($items->items);
 
         $skillResponse = new SkillResponse();
-
 
         //최종 : 노출 글자수를 줄이거나, 한 단계 더 가서 자세히보기를 작성해야함
         //방법 1 :
@@ -701,6 +666,42 @@ class Chatbot extends CI_Controller {
         );
 
         array_push($skillResponse->template->outputs, $commerceCard);
+        echo json_encode($skillResponse, JSON_UNESCAPED_UNICODE);
+    }
+
+
+    public function test2(){
+        $skillResponse = new SkillResponse();
+        $carousel = new Carousel();
+
+        // $carousel->setType("basicCard");
+        // $basicCard = new BasicCard();
+        // $basicCard->setContent("타이틀", "설명");
+        // $basicCard->addThumbnail("https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722943__340.jpg", "이미지가 없을 때 나오는 텍스트", true, 100, 100, "http://naver.com");        
+        // $basicCard->addButton("블록연결", "block", "5e608fe803ec21000146e018");
+        // $basicCard->addButton("링크연결", "webLink", "http://naver.com");
+        // $basicCard->addButton("전화연결", "phone", "010-2208-5026");
+        // $carousel->setBasicCard($basicCard);
+        
+        // $tray = (Object)array("carousel"=>$carousel);
+        // array_push($tray->carousel->items, $commerceCard);
+        // array_push($skillResponse->template->outputs, $tray);
+        // echo json_encode($skillResponse, JSON_UNESCAPED_UNICODE);
+
+        $carousel->setType("commerceCard");
+        $commerceCard = new CommerseCard();
+        $commerceCard->title ="";
+        $commerceCard->description = "테스트";
+        $commerceCard->price = 10000;
+        $commerceCard->discount = 3000;
+        $commerceCard->currency = "won";
+        $commerceCard->addThumbnail("https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722943__340.jpg", "http://naver.com");
+        $commerceCard->addProfile("https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722943__340.jpg", "프로파일 텍스트");
+        $commerceCard->addButton("전화연결", "phone", "010-2208-5026");
+
+        $tray = (Object)array("carousel"=>$carousel);
+        array_push($tray->carousel->items, $commerceCard);
+        array_push($skillResponse->template->outputs, $tray);
         echo json_encode($skillResponse, JSON_UNESCAPED_UNICODE);
     }
 }   
