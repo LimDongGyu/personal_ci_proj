@@ -1326,3 +1326,21 @@ docker-compose rm [서비스 이름]
     *   1.5. 본인인증 문자 발송 및 본인확인
     *   1.6. 고객정보 없을 때, 회원가입 시킬건지? 절차? 어떤 테이블에 어떤 정보까지 들어가는지?
     */
+
+    /**
+     * ? opencv 도커 설치
+     * 
+     * windows7 이하일 때,
+     * docker-virtualBox
+     * docker-machine rm default
+     * docker-machine create -d virtualbox --virtualbox-disk-size "100000" default
+     * --------------------------------------------------------------------------------------
+     * docker pull opencvcourses/opencv:4-1-0-conda-dlib
+     * docker run --rm -it -d --name opencv-course -v /f/opencv/:/home/lim/work/ -p 5000:5000 -p 8888:8888 opencvcourses/opencv:4-1-0-conda-dlib /bin/bash
+     */
+
+
+
+
+     
+     //git fork?
