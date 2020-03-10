@@ -22,16 +22,16 @@
         //@fixedRation  : (boolean) true-> 1:1, false-> 2:1 ratio
         //@width        : (int)  if using fixedRation=1:1, ex) "100"
         //@height       : (int)  if using fixedRation=1:1, ex) "100"
-        // public function addThumbnail($imageUrl, $altText="", $fixedRation=false, $width=200, $height=100, $link=""){
-        public function addThumbnail($imageUrl, $link=""){
-                $this->thumbnails=array(
-                    (Object)array(
-                "imageUrl"=>$imageUrl, 
-                // "altText"=>$altText,
-                // "fixedRation"=>$fixedRation,
-                // "width"=>$width,
-                // "height"=>$height,
-            ));
+        public function addThumbnail($imageUrl, $altText="", $fixedRation=false, $width=200, $height=100, $link=""){
+            $this->thumbnails=array(
+                (Object)array(
+                    "imageUrl"=>$imageUrl, 
+                    "altText"=>$altText,
+                    "fixedRation"=>$fixedRation,
+                    "width"=>$width,
+                    "height"=>$height,
+                )
+            );
 
             //link type : mobile | link | ios | android | pc | mac | win | web=default
             if(!($link == null || "")){

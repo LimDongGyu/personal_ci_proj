@@ -1,8 +1,10 @@
 <?php
     header('Content-Type : application/json; charset=utf-8');
+    $url_api = "http://museapi.mement.net/chatbotApi";
+?>
 
+<?php
 class Chatbot extends CI_Controller {
-
 	function __construct() {       
         parent::__construct();
         $this->load->library('carousel');
@@ -10,27 +12,6 @@ class Chatbot extends CI_Controller {
         $this->load->library('commerseCard');
         $this->load->library('skillResponse');
     }
-
-
-    public function curlPost($url, $data=""){
-        $ch = curl_init(); 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'User-Agent: Mozilla/5.0',
-        ));
-
-        if(!($data == "" || $data == null)){
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);   
-        }
-
-        $output = curl_exec($ch);
-        curl_close($ch);
-
-        return $output;
-    }
-
 
     //챗봇 로그저장
 	public function index() {
@@ -64,7 +45,8 @@ class Chatbot extends CI_Controller {
         $raw_post_data = file_get_contents('php://input');
         $skillPayload = json_decode($raw_post_data);
 
-        $url = 'http://15.164.189.152/chatbotApi/cb_customer_confirm';
+        global $url_api;
+        $url = $url_api. "/cb_customer_confirm";
         $data['phone'] = $skillPayload->action->params->custom_phone;
         $output = $this->curlPost($url, $data);
         $confirm = json_decode($output);
@@ -86,20 +68,6 @@ class Chatbot extends CI_Controller {
         $description .= "\n▶ 메모: ".$user_data['custom_memo'];
 
         if($cnt == 1){
-            // $user_data = array(
-            //     'custom_name'=>$skillPayload->action->params->custom_name,
-            //     'custom_phone'=>$skillPayload->action->params->custom_phone,
-            //     'custom_car'=>$skillPayload->action->params->custom_car,
-            //     'custom_memo'=>$skillPayload->action->params->custom_memo,
-            // );
-    
-            // $description  = "입력하신 정보가 맞습니까?";
-            // $description .= "\n\n▶ 이름: ".$user_data['custom_name'];
-            // $description .= "\n▶ 전화번호: ".$user_data['custom_phone'];
-            // $description .= "\n▶ 차량주차 대수: ".$user_data['custom_car'];
-            // $description .= "\n▶ 메모: ".$user_data['custom_memo'];
-    
-            //db 저장
             if(!empty($user_data['custom_name']) || !empty($user_data['custom_phone']) || !empty($user_data['custom_memo']) || !($user_data['custom_car'] == null || "")){
                 $query = $this->db->insert('chatbot_customInfo', $user_data);
             }else{
@@ -149,7 +117,7 @@ class Chatbot extends CI_Controller {
                         (Object)array(
                             "label"=>"선택",
                             "action"=>"block",
-                            "blockId"=>"5e65d57dc86a5f0001db07db",
+                            "blockId"=>"5e608fe803ec21000146e018",
                             "extra"=>(Object)array(
                                 "custom_name"=>$skillPayload->action->params->custom_name,
                                 "custom_phone"=>$confirm->customer[$i]->phone,
@@ -195,11 +163,11 @@ class Chatbot extends CI_Controller {
         echo json_encode($res, JSON_UNESCAPED_UNICODE);
     }
 
-
     public function getMainCategory(){
-        $url = 'http://15.164.189.152/chatbotApi/cb_main_reser';
-        $output = $this->curlPost($url);
+        global $url_api;
+        $url = $url_api. "/cb_main_reser";
 
+        $output = $this->curlPost($url);
         $categories = json_decode($output);
         $cnt = count($categories->categorys);
 
@@ -231,7 +199,7 @@ class Chatbot extends CI_Controller {
                         "blockId"=>"5e65d57dc86a5f0001db07db",
                         "extra"=>(Object)array(
                             "categoryId"=>$categories->categorys[$i]->id,
-                            "chainId"=>$categories->categorys[$i]->chainId
+                            "chainId"=>$categories->categorys[$i]->chainId,
                         )
                     )
                 )
@@ -247,7 +215,9 @@ class Chatbot extends CI_Controller {
         $raw_post_data = file_get_contents('php://input');
         $skillPayload = json_decode($raw_post_data);
 
-        $url = 'http://15.164.189.152/chatbotApi/cb_main_reser_middles';
+        global $url_api;
+        $url = $url_api. "/cb_main_reser_middles";
+
         $data['categoryId'] = $skillPayload->action->clientExtra->categoryId;
         $output = $this->curlPost($url, $data);
         $middles = json_decode($output);
@@ -266,7 +236,6 @@ class Chatbot extends CI_Controller {
 
         for($i=0; $i < $cnt; $i++){
             $description = "";
-            // $description .= str_replace("<br>", "", $middles->middles[$i]->homePageMainName)."\n";
             $description .= str_replace("<br>", "", $middles->middles[$i]->homePageSubName);
             $price = (int)$middles->middles[$i]->okPrice ? (int)$middles->middles[$i]->okPrice : (int)$middles->middles[$i]->minPrice;
             array_push($carouselTray->carousel->items, (Object)array(
@@ -309,7 +278,8 @@ class Chatbot extends CI_Controller {
         $raw_post_data = file_get_contents('php://input');
         $skillPayload = json_decode($raw_post_data);
 
-        $url = 'http://15.164.189.152/chatbotApi/cb_main_reser_detail';
+        global $url_api;
+        $url = $url_api. "/cb_main_reser_detail";
         $data['middleId'] = $skillPayload->action->clientExtra->middleId;
         $output = $this->curlPost($url, $data);
         $details = json_decode($output);
@@ -353,9 +323,17 @@ class Chatbot extends CI_Controller {
                     (Object)array(
                         "label"=>"선택",
                         "action"=>"block",
-                        "blockId"=>"5e65a49280ea0a000175dc50",
+                        "blockId"=>"5e671ed39d997a00018bb4ca",
                         "extra"=>(Object)array(
+                            "id"=>$details->middles->events[$i]->id,
                             "middleId"=>$details->middles->events[$i]->middleId,
+                            "itemName"=>$details->middles->events[$i]->itemName,
+                            "price"=>$details->middles->events[$i]->discountedPrice,
+                            "startDate"=>$details->middles->events[$i]->startDate,
+                            "endDate"=>$details->middles->events[$i]->endDate,
+                            "dayOfTheWeek1"=>$details->middles->events[$i]->dayOfTheWeek1,
+                            "startTime"=>$details->middles->events[$i]->startTime,
+                            "endTime"=>$details->middles->events[$i]->endTime
                         )
                     )
                 )
@@ -405,7 +383,8 @@ class Chatbot extends CI_Controller {
 
     //예약하기 - 이벤트 리스트
     public function eventMainCategories(){
-        $url = 'http://15.164.189.152/chatbotApi/cb_event_main';
+        global $url_api;
+        $url = $url_api. "/cb_event_main";
         $output = $this->curlPost($url);
         $events = json_decode($output);
 
@@ -442,8 +421,13 @@ class Chatbot extends CI_Controller {
                         "action"=>"block",
                         "blockId"=>"5e65a49280ea0a000175dc50",
                         "extra"=>(Object)array(
+                            "dayOfTheWeek"=>$events->groups[$i]->dayOfTheWeek,
                             "groupId"=>$events->groups[$i]->id,
                             "chainId"=>$events->groups[$i]->chainId,
+                            "startTime"=>$events->groups[$i]->startTime,
+                            "endTime"=>$events->groups[$i]->endTime,
+                            "startDate"=>$events->event_cha[0]->startDate,
+                            "endDate"=>$events->event_cha[0]->endDate,
                             // "title"=>$events->groups[$i]->groupName,
                         )                        
                     )
@@ -461,7 +445,9 @@ class Chatbot extends CI_Controller {
         
         $data['groupId'] = $skillPayload->action->clientExtra->groupId;
         $data['chainId'] = $skillPayload->action->clientExtra->chainId;
-        $url = 'http://15.164.189.152/chatbotApi/cb_event_groups';
+
+        global $url_api;
+        $url = $url_api. "/cb_event_groups";
         $output = $this->curlPost($url, $data);
         $items = json_decode($output);
         $cnt = count($items->items);
@@ -506,16 +492,21 @@ class Chatbot extends CI_Controller {
                     (Object)array(
                         "label"=>"선택",
                         "action"=>"block",
-                        "blockId"=>"5e65a49280ea0a000175dc50",
+                        "blockId"=>"5e671ed39d997a00018bb4ca",
                         "extra"=>(Object)array(
-                            // ""=>""
-                            "groupId"=>$skillPayload->action->clientExtra->groupId
+                            // "groupId"=>$skillPayload->action->clientExtra->groupId,
+                            "itemName"=>str_replace("<br>", "", $items->items[$i]->itemName),
+                            "price"=>$items->items[$i]->discountedPrice,
+                            "dayOfTheWeek1"=>$skillPayload->action->clientExtra->dayOfTheWeek,
+                            "startTime"=>$skillPayload->action->clientExtra->startTime,
+                            "endTime"=>$skillPayload->action->clientExtra->endTime,
+                            "startDate"=>$skillPayload->action->clientExtra->startDate,
+                            "endDate"=>$skillPayload->action->clientExtra->endDate,
                         )
                     )
                 )
             ));
-        }
-        
+        }        
         
         //방법2
         //카드 : 타이틀(20자), 내용(76자)
@@ -559,6 +550,84 @@ class Chatbot extends CI_Controller {
         echo json_encode($skillResponse, JSON_UNESCAPED_UNICODE);
     }
 
+
+    public function cb_chooseDate(){
+        $raw_post_data = file_get_contents('php://input');
+        $skillPayload = json_decode($raw_post_data);
+
+        $skillResponse = new SkillResponse();
+        $basicCard = new BasicCard();
+        $description = "▶ 상품명 : ";
+        $description .= $skillPayload->action->clientExtra->itemName;
+        $description .= "\n▶ 가격 : ".$skillPayload->action->clientExtra->price ."원";
+        $description .= "\n\n 결제는 내원 시 진행됩니다.";
+        $basicCard->setContent("선택하신 상품입니다.", $description);
+        $basicCard->addThumbnail("https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722943__340.jpg", "이미지가 없을 때 나오는 텍스트", true, 100, 100, "http://naver.com");        
+        array_push($skillResponse->template->outputs, array("basicCard"=>$basicCard));
+
+        $startDate = $skillPayload->action->clientExtra->startDate;
+        $endDate =  $skillPayload->action->clientExtra->endDate;
+        $dayOfTheWeek = $skillPayload->action->clientExtra->dayOfTheWeek1;
+
+        $result = $this->chooseDate($startDate, $endDate, $dayOfTheWeek);
+        $skillResponse->addSimpleText("예약하실 수 있는 날짜는 다음과 같습니다.");
+
+        //날짜 선택이 10개 이하일 때만 가능
+        for($i=0; $i < count($result); $i++){
+            //block 연결은 PC카톡에서 quickReplies가 노출되지 않음 
+            //발화이기 때문에, 블록 연결로 action, detail 잡고, 날짜 정보는 extra로 값을 넘기는 걸로,
+            $skillResponse->addQuickReplies($result[$i], "block", "5e672b5a290754000165a449");
+            $skillResponse->addQuickExtra($i, "chooseDate", $result[$i]);
+            $skillResponse->addQuickExtra($i, "startTime", $skillPayload->action->clientExtra->startTime);
+            $skillResponse->addQuickExtra($i, "endTime", $skillPayload->action->clientExtra->endTime);
+
+            // 차후에 저장하는 값이 무엇인지에 따라서 넘겨줄 extra 값 지정
+            // "id"=>$details->middles->events[$i]->id,
+            // "middleId"=>$details->middles->events[$i]->middleId,
+            // "itemName"=>$details->middles->events[$i]->itemName,
+            // "price"=>$details->middles->events[$i]->discountedPrice,
+            // "startDate"=>$details->middles->events[$i]->startDate,
+            // "endDate"=>$details->middles->events[$i]->endDate,
+            // "dayOfTheWeek1"=>$details->middles->events[$i]->dayOfTheWeek1,
+        }
+        echo json_encode($skillResponse, JSON_UNESCAPED_UNICODE);
+    }
+
+    
+    public function cb_chooseTime(){
+        $raw_post_data = file_get_contents('php://input');
+        $skillPayload = json_decode($raw_post_data);
+        $skillResponse = new SkillResponse();
+
+        $chooseDate = $skillPayload->action->clientExtra->chooseDate;
+        $startTime = $skillPayload->action->clientExtra->startTime;
+        $endTime =  $skillPayload->action->clientExtra->endTime;
+        $result = $this->chooseTime($chooseDate, $startTime, $endTime);
+
+        $basicCard = new BasicCard();
+        $description = "▶ 예약날짜 : ".$chooseDate;
+        $basicCard->setContent("예약가능한 시간입니다.", $description);
+        $basicCard->addThumbnail("https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722943__340.jpg", "이미지가 없을 때 나오는 텍스트", true, 100, 100, "http://naver.com");        
+        array_push($skillResponse->template->outputs, array("basicCard"=>$basicCard));
+
+        //날짜 선택이 10개 이하일 때만 가능
+        for($i=0; $i < count($result); $i++){
+            //block 연결은 PC카톡에서 quickReplies가 노출되지 않음 
+            //발화이기 때문에, 블록 연결로 action, detail 잡고, 날짜 정보는 extra로 값을 넘기는 걸로,
+            $skillResponse->addQuickReplies($result[$i], "block", "5e672e987d7e87000112a413");
+            // $skillResponse->addQuickExtra($i, "key", "value");
+
+            // 차후에 저장하는 값이 무엇인지에 따라서 넘겨줄 extra 값 지정
+            // "id"=>$details->middles->events[$i]->id,
+            // "middleId"=>$details->middles->events[$i]->middleId,
+            // "itemName"=>$details->middles->events[$i]->itemName,
+            // "price"=>$details->middles->events[$i]->discountedPrice,
+            // "startDate"=>$details->middles->events[$i]->startDate,
+            // "endDate"=>$details->middles->events[$i]->endDate,
+            // "dayOfTheWeek1"=>$details->middles->events[$i]->dayOfTheWeek1,
+        }
+        echo json_encode($skillResponse, JSON_UNESCAPED_UNICODE);
+    }
 
     //봇응답 예시
     public function test(){
@@ -670,38 +739,118 @@ class Chatbot extends CI_Controller {
     }
 
 
-    public function test2(){
-        $skillResponse = new SkillResponse();
-        $carousel = new Carousel();
+/*************************************function*********************************************/
 
-        // $carousel->setType("basicCard");
-        // $basicCard = new BasicCard();
-        // $basicCard->setContent("타이틀", "설명");
-        // $basicCard->addThumbnail("https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722943__340.jpg", "이미지가 없을 때 나오는 텍스트", true, 100, 100, "http://naver.com");        
-        // $basicCard->addButton("블록연결", "block", "5e608fe803ec21000146e018");
-        // $basicCard->addButton("링크연결", "webLink", "http://naver.com");
-        // $basicCard->addButton("전화연결", "phone", "010-2208-5026");
-        // $carousel->setBasicCard($basicCard);
-        
-        // $tray = (Object)array("carousel"=>$carousel);
-        // array_push($tray->carousel->items, $commerceCard);
-        // array_push($skillResponse->template->outputs, $tray);
-        // echo json_encode($skillResponse, JSON_UNESCAPED_UNICODE);
+    public function curlPost($url, $data=""){
+        $ch = curl_init(); 
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'User-Agent: Mozilla/5.0',
+        ));
 
-        $carousel->setType("commerceCard");
-        $commerceCard = new CommerseCard();
-        $commerceCard->title ="";
-        $commerceCard->description = "테스트";
-        $commerceCard->price = 10000;
-        $commerceCard->discount = 3000;
-        $commerceCard->currency = "won";
-        $commerceCard->addThumbnail("https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722943__340.jpg", "http://naver.com");
-        $commerceCard->addProfile("https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722943__340.jpg", "프로파일 텍스트");
-        $commerceCard->addButton("전화연결", "phone", "010-2208-5026");
+        if(!($data == "" || $data == null)){
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);   
+        }
 
-        $tray = (Object)array("carousel"=>$carousel);
-        array_push($tray->carousel->items, $commerceCard);
-        array_push($skillResponse->template->outputs, $tray);
-        echo json_encode($skillResponse, JSON_UNESCAPED_UNICODE);
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        return $output;
     }
+
+
+    public function chooseDate($startDate, $endDate, $dayOfTheWeek){
+        //main 시술일 때,
+        //1. 날짜는 groups[]-> startDate, endDate를 가져와서 설정
+        //2. 요일은 groups[]-> dayOfTheWeek의 값을 가져와서 설정할 수 있도록 함
+        //3. 시간은 groups[]-> startTime, endTime을 설정(30분 단위)    
+
+        if($startDate == null || $startDate == ""){
+            $start = strtotime("now");
+            $end = strtotime("+2 week");
+        }else{
+            $start = strtotime($startDate);
+            $end = strtotime($endDate);
+
+            if(strtotime($startDate) < strtotime("now")){
+                $start = strtotime("now");
+            }
+        }
+
+        //2. 요일
+        $startWeek = substr($dayOfTheWeek, 0, 1);
+        $endWeek = substr($dayOfTheWeek, -1);
+
+        //요일이 연속적일 때,
+        // $result = array();
+        // while ($start <= $end) {
+        //     if ((date('N', $start) >= $startWeek) && (date('N', $start) <= $endWeek)) {
+        //         array_push($result, date('Y-m-d', $start));
+        //     }
+        //     $start += 86400;
+        // }
+
+
+        //요일이 비연속적일 때도 사용 가능
+        $result = array();
+        for($i=0; $i < strlen($dayOfTheWeek); $i++){
+            $starts = $start;
+            $ends = $end;
+            while ($starts <= $ends) {
+                if ((date('N', $starts) == substr($dayOfTheWeek, $i, 1))) {
+                    array_push($result, date('Y-m-d', $starts));
+                }
+                $starts += 86400;
+            }
+        }
+        usort($result, function($a, $b){
+            return strtotime($a) - strtotime($b);
+        });
+
+        return $result;
+    }
+
+
+    public function chooseTime($chooseDate="9999-99-99", $startTime="10", $endTime="20"){
+        date_default_timezone_set('Asia/Seoul');
+        if($chooseDate == "9999-99-99"){$chooseDate =  strtotime(date('Y-m-d'));}
+        
+        $chooseDate = strtotime($chooseDate);
+        $currentDate = strtotime(date('Y-m-d'));
+
+        $start = strtotime($startTime.=":00:00");
+        $end = strtotime($endTime.=":00:00");
+
+        $result = array();
+
+        if($chooseDate > $currentDate){
+            while($start <= $end){
+                array_push($result, date('h:i a', $start));
+                $start += 1800;
+            }
+        }
+        else if($chooseDate == $currentDate){
+            $currentTime = (string)date('h:i a', strtotime("now"));
+            $hour = (int)substr($currentTime, 0, 2);
+            $min = (int)substr($currentTime, 3, 2);
+    
+            if($min >= 30){$hour+=1; $min="00";}
+            else{$min="30";}
+    
+            $currentTime = strtotime((string)$hour.":".$min. substr($currentTime, 6, 2));
+    
+            if($start < $currentTime){
+                $start = $currentTime;
+            }
+
+            while($start <= $end){
+                array_push($result, date('h:i a', $start));
+                $start += 1800;
+            }
+        }
+
+        return $result;
+    }      
 }   
