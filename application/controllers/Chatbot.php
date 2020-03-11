@@ -370,6 +370,12 @@ class Chatbot extends CI_Controller {
                         "blockId"=>"5e65a49280ea0a000175dc50",
                         "extra"=>(Object)array(
                             "middleId"=>$details->middles->defaults[$i]->middleId,
+                            "id"=>$details->middles->defaults[$i]->id,
+                            "itemName"=>$details->middles->defaults[$i]->homePageMainName,
+                            "price"=>$details->middles->defaults[$i]->price,
+                            "dayOfTheWeek1"=>"123456",
+                            "startTime"=>"10",
+                            "endTime"=>"20"
                         )
                     )
                 )
